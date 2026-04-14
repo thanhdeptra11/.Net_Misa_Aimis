@@ -1,0 +1,66 @@
+﻿
+using DL;
+using DL.Interface;
+
+namespace web_06
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+
+            // Add services to the container.
+
+            builder.Services.AddControllers();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
+            builder.Services.AddSingleton<IDbConnectionFactory, MySqlConnectionFactory>();
+            
+            // Register Customer DL & BL
+            builder.Services.AddScoped<DL.Interface.ICustomerRepository, DL.CustomerRepository>();
+            builder.Services.AddScoped<DL.Interface.IBaseDL<Model.Customer>, DL.CustomerRepository>();
+            builder.Services.AddScoped<BL.Interface.ICustomerBL, BL.CustomerBL>();
+            builder.Services.AddScoped<BL.Interface.IBaseBL<Model.Customer>, BL.CustomerBL>();
+
+            // Register SaleOrder DL & BL
+            builder.Services.AddScoped<DL.Interface.ISaleOrderRepository, DL.SaleOrderRepository>();
+            builder.Services.AddScoped<DL.Interface.IBaseDL<Model.SaleOrder>, DL.SaleOrderRepository>();
+            builder.Services.AddScoped<BL.Interface.ISaleOrderBL, BL.SaleOrderBL>();
+            builder.Services.AddScoped<BL.Interface.IBaseBL<Model.SaleOrder>, BL.SaleOrderBL>();
+
+            // Register SaleOrderDetail DL & BL
+            builder.Services.AddScoped<DL.Interface.ISaleOrderDetailRepository, DL.SaleOrderDetailRepository>();
+            builder.Services.AddScoped<DL.Interface.IBaseDL<Model.SaleOrderDetail>, DL.SaleOrderDetailRepository>();
+            builder.Services.AddScoped<BL.Interface.ISaleOrderDetailBL, BL.SaleOrderDetailBL>();
+            builder.Services.AddScoped<BL.Interface.IBaseBL<Model.SaleOrderDetail>, BL.SaleOrderDetailBL>();
+
+
+
+            Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+
+            var app = builder.Build();
+
+
+            app.UseMiddleware<Middleware.ExceptionHandlingMiddleware>();
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseAuthorization();
+
+
+            app.MapControllers();
+
+            app.Run();
+        }
+    }
+}

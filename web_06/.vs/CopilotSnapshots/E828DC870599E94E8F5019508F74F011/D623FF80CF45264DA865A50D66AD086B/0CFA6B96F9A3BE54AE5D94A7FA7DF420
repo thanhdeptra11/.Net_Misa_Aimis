@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Model
+{
+    /// <summary>
+    /// Đại diện cho chi tiết một dòng hàng trong đơn hàng bán
+    /// </summary>
+    public class SaleOrderDetail : BaseModel
+    {
+        /// <summary>
+        /// ID đơn hàng
+        /// </summary>
+        public Guid SaleOrderId { get; set; }
+
+        /// <summary>
+        /// Tên hàng hóa
+        /// </summary>
+        public string? ItemName { get; set; }
+
+        /// <summary>
+        /// Số lượng
+        /// </summary>
+        public decimal Quantity { get; set; }
+
+        /// <summary>
+        /// Giá đơn vị
+        /// </summary>
+        public decimal UnitPrice { get; set; }
+
+        /// <summary>
+        /// Thành tiền (Quantity * UnitPrice)
+        /// </summary>
+        public decimal Amount { get; set; }
+
+        // Kế thừa từ BaseModel:
+        // - Id (Guid): ID chi tiết đơn hàng
+        // - CreatedDate (DateTime): Ngày tạo
+        // - CreatedBy (string?): Người tạo
+        // - ModifiedDate (DateTime?): Ngày sửa đổi
+        // - ModifiedBy (string?): Người sửa đổi
+    }
+}

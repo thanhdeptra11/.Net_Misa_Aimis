@@ -1,0 +1,64 @@
+﻿using BL.Interface;
+using Microsoft.AspNetCore.Mvc;
+using Model;
+
+namespace web_06.Controllers
+{
+    [Route("api/v1/[controller]")]
+    [ApiController]
+    public class SaleOrderDetailController : ControllerBase
+    {
+        private readonly ISaleOrderDetailBL _saleOrderDetailBL;
+
+        public SaleOrderDetailController(ISaleOrderDetailBL saleOrderDetailBL)
+        {
+            _saleOrderDetailBL = saleOrderDetailBL;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _saleOrderDetailBL.GetAllAsync();
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var result = await _saleOrderDetailBL.GetByIdAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] SaleOrderDetail saleOrderDetail)
+        {
+            var result = await _saleOrderDetailBL.AddAsync(saleOrderDetail);
+            return Ok(new { message = "Added successfully", affectedRows = result });
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] SaleOrderDetail saleOrderDetail)
+        {
+            var result = await _saleOrderDetailBL.UpdateAsync(saleOrderDetail);
+            return Ok(new { message = "Updated successfully", affectedRows = result });
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var result = await _saleOrderDetailBL.DeleteAsync(id);
+            if (result == 0)
+                return NotFound();
+            return Ok(new { message = "Deleted successfully", affectedRows = result });
+        }
+
+        [HttpPost("delete-multiple")]
+        public async Task<IActionResult> DeleteMultiple([FromBody] IEnumerable<Guid> ids)
+        {
+            var result = await _saleOrderDetailBL.DeleteMultipleAsync(ids);
+            return Ok(new { message = "Deleted successfully", affectedRows = result });
+        }
+    }
+}

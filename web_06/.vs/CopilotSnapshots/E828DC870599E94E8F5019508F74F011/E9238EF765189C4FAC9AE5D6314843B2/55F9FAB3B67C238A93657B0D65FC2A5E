@@ -1,0 +1,43 @@
+﻿using BL.Base;
+using BL.Interface;
+using Common.Model;
+using DL.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BL.Service
+{
+    public class CustomerBL : BaseBL<Customer>, ICustomerBL
+    {
+        private readonly ICustomerRepository _repository;
+
+        public CustomerBL(ICustomerRepository repository) : base(repository)
+        {
+            _repository = repository;
+        }
+
+        // Override AddAsync để set ID tự động
+        public override async Task<int> AddAsync(Customer entity)
+        {
+            entity.Id = Guid.NewGuid();
+            entity.CreatedDate = DateTime.UtcNow;
+            return await base.AddAsync(entity);
+        }
+
+        // Override UpdateAsync để update ModifiedDate
+        public override async Task<int> UpdateAsync(Customer entity)
+        {
+            entity.ModifiedDate = DateTime.UtcNow;
+            return await base.UpdateAsync(entity);
+        }
+
+        public override async Task BeforeSave(List<Customer> baseModels)
+        {
+            // Thêm logic validation đặc thù cho Customer nếu cần
+            await base.BeforeSave(baseModels);
+        }
+    }
+}

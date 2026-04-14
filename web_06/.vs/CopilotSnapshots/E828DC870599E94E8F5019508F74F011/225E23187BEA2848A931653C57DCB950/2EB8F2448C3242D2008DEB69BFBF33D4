@@ -1,0 +1,22 @@
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Model
+{
+    public abstract class BaseModel
+    {
+        [Column("id")]  // Default: id, override ở child class nếu cần
+        public Guid Id { get; set; }
+
+        [Column("create_date")]
+        public DateTime CreatedDate { get; set; }
+
+        [Column("create_by")]
+        public string? CreatedBy { get; set; }
+
+        [Column("modified_date")]
+        public DateTime? ModifiedDate { get; set; }
+
+        [Column("modified_by")]
+        public string? ModifiedBy { get; set; }
+    }
+}

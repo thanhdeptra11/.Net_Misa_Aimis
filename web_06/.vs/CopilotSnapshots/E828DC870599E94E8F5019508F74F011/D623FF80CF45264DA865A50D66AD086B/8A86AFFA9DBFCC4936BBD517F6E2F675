@@ -1,0 +1,19 @@
+﻿using Dapper;
+using DL.Interface;
+using Model;
+
+namespace DL
+{
+    public class CustomerRepository : BaseDL<Customer>, ICustomerRepository
+    {
+        protected override string TableName => "customer";
+        protected override string IdColumnName => "customer_id";
+
+        public CustomerRepository(IDbConnectionFactory dbFactory) : base(dbFactory)
+        {
+        }
+
+        // Kế thừa tất cả CRUD operations từ BaseDL<Customer>
+        // Override nếu cần custom logic (ví dụ: JOIN, stored procedures)
+    }
+}

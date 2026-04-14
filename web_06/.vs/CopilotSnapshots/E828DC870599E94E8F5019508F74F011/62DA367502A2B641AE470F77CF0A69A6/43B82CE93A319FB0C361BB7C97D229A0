@@ -1,0 +1,12 @@
+﻿using BL.Interface;
+using Model;
+
+namespace web_06.Controllers
+{
+    public class SaleOrderDetailController : BasesController<SaleOrderDetail>
+    {
+        public SaleOrderDetailController(IBaseBL<SaleOrderDetail> saleOrderDetailBL) : base(saleOrderDetailBL)
+        {
+        }
+    }
+}

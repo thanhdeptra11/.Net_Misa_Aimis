@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Model
+{
+    /// <summary>
+    /// Đại diện cho một khách hàng
+    /// </summary>
+    public class Customer : BaseModel
+    {
+        /// <summary>
+        /// Mã khách hàng
+        /// </summary>
+        public string? CustomerCode { get; set; }
+
+        /// <summary>
+        /// Tên khách hàng
+        /// </summary>
+        public string? CustomerName { get; set; }
+
+        /// <summary>
+        /// Địa chỉ khách hàng
+        /// </summary>
+        public string? CustomerAddr { get; set; }
+
+        // Kế thừa từ BaseModel:
+        // - Id (Guid): Id khách hàng
+        // - CreatedDate (DateTime): Ngày tạo
+        // - CreatedBy (string?): Người tạo
+        // - ModifiedDate (DateTime?): Ngày sửa đổi
+        // - ModifiedBy (string?): Người sửa đổi
+    }
+}

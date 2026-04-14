@@ -1,0 +1,25 @@
+﻿using BL;
+using BL.Interface;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace web_06.Controllers
+{
+    [Route("api/v1/[controller]")]
+    [ApiController]
+    public class BasesController<BaseModel> : ControllerBase
+    {
+        protected IBaseBL<BaseModel> _baseBL;
+
+        public BasesController(IBaseBL<BaseModel> baseBL)
+        {
+            _baseBL = baseBL;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCustomer()
+        {
+            return await _baseBL.GetAll();
+        }
+    }
+}

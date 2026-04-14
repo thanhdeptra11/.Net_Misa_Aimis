@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
+namespace Model
+{
+    /// <summary>
+    /// Đại diện cho một đơn hàng bán
+    /// </summary>
+    public class SaleOrder : BaseModel
+    {
+        [Column("customer_id")]
+        [JsonPropertyName("customerId")]
+        public Guid CustomerId { get; set; }
+
+        [Column("sale_order_no")]
+        [JsonPropertyName("saleOrderNo")]
+        public string? SaleOrderNo { get; set; }
+
+        [Column("sale_order_date")]
+        [JsonPropertyName("saleOrderDate")]
+        public DateTime SaleOrderDate { get; set; }
+
+        [Column("total_amount")]
+        [JsonPropertyName("totalAmount")]
+        public decimal TotalAmount { get; set; }
+
+        // Kế thừa từ BaseModel:
+        // - Id (Column: sale_order_id)
+        // - CreatedDate (Column: create_date)
+        // - CreatedBy (Column: create_by)
+        // - ModifiedDate (Column: modified_date)
+        // - ModifiedBy (Column: modified_by)
+    }
+}

@@ -1,0 +1,12 @@
+﻿using BL.Interface;
+using Model;
+
+namespace web_06.Controllers
+{
+    public class CustomerController : BasesController<Customer>
+    {
+        public CustomerController(IBaseBL<Customer> customerBL) : base(customerBL)
+        {
+        }
+    }
+}

@@ -1,0 +1,21 @@
+﻿using DL.Interface;
+using Model;
+
+namespace DL
+{
+    public class SaleOrderDetailRepository : BaseDL<SaleOrderDetail>, ISaleOrderDetailRepository
+    {
+        protected override string TableName => "sale_order_detail";
+
+        protected override string IdColumnName => "sale_order_detail_id";
+
+        public SaleOrderDetailRepository(IDbConnectionFactory dbFactory) : base(dbFactory)
+        {
+        }
+
+        public Task<IEnumerable<SaleOrderDetail>> GetDetailsByOrderIdAsync(Guid saleOrderId)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

@@ -1,0 +1,57 @@
+﻿using BL.Interface;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Model;
+
+namespace web_06.Controllers
+{
+    [Route("api/v1/[controller]")]
+    [ApiController]
+    public class EmployeeController : ControllerBase
+    {
+        private readonly BL.Interface.IEmployeeBL _employeeBL;
+
+        public EmployeeController(IEmployeeBL employeeBL)
+        {
+            _employeeBL = employeeBL;
+        }
+
+        [HttpGet]
+        public async Task<Object> GetEmployee()
+        {
+            return await _employeeBL.GetEmployeesAsync();
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<Object?> GetEmployeeByID(Guid id)
+        {
+            return await _employeeBL.GetEmployeeByIdAsync(id);
+        }
+
+        [HttpPost]
+        public async Task<Object> AddEmployee(Customer employee)
+        {
+            return await _employeeBL.AddEmployeeAsync(employee);
+        }
+
+        [HttpPut]
+        public async Task<Object> UpdateEmployee(Customer employee)
+        {
+            return await _employeeBL.UpdateEmployeeAsync(employee);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<Object> DeleteEmployee(Guid id)
+        {
+            return await _employeeBL.DeleteEmployeeAsync(id);
+        }
+
+        [HttpPost("delete-multiple")]
+        public async Task<Object> DeleteEmployees(IEnumerable<Guid> ids)
+        {
+            return await _employeeBL.DeleteEmployeesAsync(ids);
+        }
+    }
+}

@@ -1,0 +1,25 @@
+﻿using DL;
+using DL.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BL
+{
+    public class BaseBL<BaseModel> : Interface.IBaseBL<BaseModel>
+    {
+        protected IBaseDL<BaseModel> _baseDL;
+
+        public BaseBL(IBaseDL<BaseModel> baseDL)
+        {
+            _baseDL = baseDL;
+        }
+
+        public Task<IEnumerable<BaseModel1>> GetAll<BaseModel1>()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

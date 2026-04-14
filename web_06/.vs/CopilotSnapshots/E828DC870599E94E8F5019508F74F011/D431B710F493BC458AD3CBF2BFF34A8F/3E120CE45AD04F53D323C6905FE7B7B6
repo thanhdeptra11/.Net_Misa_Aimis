@@ -1,0 +1,24 @@
+﻿using BL.Interface;
+using DL.Interface;
+using Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BL
+{
+    public class CustomerBL : BaseBL<Customer>, ICustomerBL
+    {
+        private readonly ICustomerRepository _repository;
+
+        public CustomerBL(ICustomerRepository repository) : base(repository)
+        {
+            _repository = repository;
+        }
+
+        // Kế thừa tất cả CRUD operations từ BaseBL<Customer>
+        // Nếu cần thêm logic kinh doanh đặc thù, override các method của BaseBL
+    }
+}

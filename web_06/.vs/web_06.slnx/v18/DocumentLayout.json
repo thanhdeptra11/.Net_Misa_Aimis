@@ -1,0 +1,197 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\misa_Backend\\web_06\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D8EB1ED9-C129-FC42-3B2F-331B9F68F9D8}|..\\Model\\Common.csproj|d:\\misa_backend\\model\\extension\\extensionutility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{65D27757-48CE-6DCC-5903-D7ED0BFC7E32}|..\\BL\\BL.csproj|d:\\misa_backend\\bl\\base\\basebl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3EA8426-5ABC-7640-D74A-9DAC1979E9E6}|..\\DL\\DL.csproj|d:\\misa_backend\\dl\\base\\basedl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{65D27757-48CE-6DCC-5903-D7ED0BFC7E32}|..\\BL\\BL.csproj|d:\\misa_backend\\bl\\service\\customerbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0737240-0215-13EF-42AE-9973510DAF36}|web_06.csproj|d:\\misa_backend\\web_06\\controllers\\basescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0737240-0215-13EF-42AE-9973510DAF36}|web_06.csproj|solutionrelative:controllers\\basescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{65D27757-48CE-6DCC-5903-D7ED0BFC7E32}|..\\BL\\BL.csproj|d:\\misa_backend\\bl\\service\\saleorderdetailbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{65D27757-48CE-6DCC-5903-D7ED0BFC7E32}|..\\BL\\BL.csproj|d:\\misa_backend\\bl\\service\\saleorderbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 16,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:7:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:20:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:28:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ExtensionUtility.cs",
+              "DocumentMoniker": "D:\\misa_Backend\\Model\\Extension\\ExtensionUtility.cs",
+              "RelativeDocumentMoniker": "..\\Model\\Extension\\ExtensionUtility.cs",
+              "ToolTip": "D:\\misa_Backend\\Model\\Extension\\ExtensionUtility.cs",
+              "RelativeToolTip": "..\\Model\\Extension\\ExtensionUtility.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAqwDEAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T02:46:56.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BasesController.cs",
+              "DocumentMoniker": "D:\\misa_Backend\\web_06\\Controllers\\BasesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BasesController.cs",
+              "ToolTip": "D:\\misa_Backend\\web_06\\Controllers\\BasesController.cs",
+              "RelativeToolTip": "Controllers\\BasesController.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAA/wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T02:08:46.46Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SaleOrderBL.cs",
+              "DocumentMoniker": "D:\\misa_Backend\\BL\\Service\\SaleOrderBL.cs",
+              "RelativeDocumentMoniker": "..\\BL\\Service\\SaleOrderBL.cs",
+              "ToolTip": "D:\\misa_Backend\\BL\\Service\\SaleOrderBL.cs",
+              "RelativeToolTip": "..\\BL\\Service\\SaleOrderBL.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T02:04:16.45Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SaleOrderDetailBL.cs",
+              "DocumentMoniker": "D:\\misa_Backend\\BL\\Service\\SaleOrderDetailBL.cs",
+              "RelativeDocumentMoniker": "..\\BL\\Service\\SaleOrderDetailBL.cs",
+              "ToolTip": "D:\\misa_Backend\\BL\\Service\\SaleOrderDetailBL.cs",
+              "RelativeToolTip": "..\\BL\\Service\\SaleOrderDetailBL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T15:52:26.157Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CustomerBL.cs",
+              "DocumentMoniker": "D:\\misa_Backend\\BL\\Service\\CustomerBL.cs",
+              "RelativeDocumentMoniker": "..\\BL\\Service\\CustomerBL.cs",
+              "ToolTip": "D:\\misa_Backend\\BL\\Service\\CustomerBL.cs",
+              "RelativeToolTip": "..\\BL\\Service\\CustomerBL.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwB8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-09T15:20:14.199Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BaseBL.cs",
+              "DocumentMoniker": "D:\\misa_Backend\\BL\\Base\\BaseBL.cs",
+              "RelativeDocumentMoniker": "..\\BL\\Base\\BaseBL.cs",
+              "ToolTip": "D:\\misa_Backend\\BL\\Base\\BaseBL.cs",
+              "RelativeToolTip": "..\\BL\\Base\\BaseBL.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAswCQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T07:35:36.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BaseDL.cs",
+              "DocumentMoniker": "D:\\misa_Backend\\DL\\Base\\BaseDL.cs",
+              "RelativeDocumentMoniker": "..\\DL\\Base\\BaseDL.cs",
+              "ToolTip": "D:\\misa_Backend\\DL\\Base\\BaseDL.cs",
+              "RelativeToolTip": "..\\DL\\Base\\BaseDL.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T07:30:12.072Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

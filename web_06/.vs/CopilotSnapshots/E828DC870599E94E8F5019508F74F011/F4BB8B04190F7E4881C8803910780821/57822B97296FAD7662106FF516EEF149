@@ -1,0 +1,19 @@
+﻿using Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DL.Interface
+{
+    internal interface IEmployeeRepository
+    {
+        Task<IEnumerable<Employee>> GetAllAsync();
+        Task<Employee?> GetByIdAsync(Guid id);
+        Task<int> AddAsync(Employee employee);
+        Task<int> UpdateAsync(Employee employee);
+        Task<int> DeleteAsync(Guid id);
+        Task<int> DeleteMultipleAsync(IEnumerable<Guid> ids);
+    }
+}

@@ -1,0 +1,63 @@
+﻿using BL.Interface;
+using Microsoft.AspNetCore.Mvc;
+
+namespace web_06.Controllers
+{
+    [Route("api/v1/[controller]")]
+    [ApiController]
+    public abstract class BasesController<T> : ControllerBase where T : class
+    {
+        protected readonly IBaseBL<T> _baseBL;
+
+        public BasesController(IBaseBL<T> baseBL)
+        {
+            _baseBL = baseBL;
+        }
+
+        [HttpGet]
+        public virtual async Task<IActionResult> GetAll()
+        {
+            var result = await _baseBL.GetAllAsync();
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public virtual async Task<IActionResult> GetById(Guid id)
+        {
+            var result = await _baseBL.GetByIdAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public virtual async Task<IActionResult> Add([FromBody] T entity)
+        {
+            var result = await _baseBL.AddAsync(entity);
+            return Ok(new { message = Resources.Messages.AddedSuccessfully, affectedRows = result });
+        }
+
+        [HttpPut]
+        public virtual async Task<IActionResult> Update([FromBody] T entity)
+        {
+            var result = await _baseBL.UpdateAsync(entity);
+            return Ok(new { message = Resources.Messages.UpdatedSuccessfully, affectedRows = result });
+        }
+
+        [HttpDelete("{id}")]
+        public virtual async Task<IActionResult> Delete(Guid id)
+        {
+            var result = await _baseBL.DeleteAsync(id);
+            if (result == 0)
+                return NotFound();
+            return Ok(new { message = Resources.Messages.DeletedSuccessfully, affectedRows = result });
+        }
+
+        [HttpPost("delete-multiple")]
+        public virtual async Task<IActionResult> DeleteMultiple([FromBody] IEnumerable<Guid> ids)
+        {
+            var result = await _baseBL.DeleteMultipleAsync(ids);
+            return Ok(new { message = Resources.Messages.DeletedSuccessfully, affectedRows = result });
+        }
+    }
+}

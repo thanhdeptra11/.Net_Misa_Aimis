@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="../BL/BL.csproj" />
+  <Project Path="../DL/DL.csproj" />
+  <Project Path="../Model/Common.csproj" />
+  <Project Path="web_06.csproj" />
+</Solution>

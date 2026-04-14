@@ -1,0 +1,10 @@
+﻿using System;
+using Common.Model.Attributes;
+
+namespace BL.Attributes
+{
+    [AttributeUsage(AttributeTargets.Property)]
+    public class UniqueAttribute : UniqueAttribute
+    {
+    }
+}

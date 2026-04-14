@@ -1,0 +1,41 @@
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+using BL.Attributes;
+
+namespace Common.Model
+{
+    /// <summary>
+    /// Đại diện cho một khách hàng
+    /// </summary>
+    public class Customer : BaseModel
+    {
+        // Ghi đè Id và đổi tên cột thành customer_id
+        [Column("customer_id")]
+        [JsonPropertyName("id")]
+        public override Guid Id
+        {
+            get => base.Id;
+            set => base.Id = value;
+        }
+
+        [Column("customer_code")]
+        [JsonPropertyName("customerCode")]
+        [Unique]
+        public string? CustomerCode { get; set; }
+
+        [Column("customer_name")]
+        [JsonPropertyName("customerName")]
+        public string? CustomerName { get; set; }
+
+        [Column("customer_addr")]
+        [JsonPropertyName("customerAddr")]
+        public string? CustomerAddr { get; set; }
+
+        // Kế thừa từ BaseModel:
+        // - Id (Column: customer_id)
+        // - CreatedDate (Column: create_date)
+        // - CreatedBy (Column: create_by)
+        // - ModifiedDate (Column: modified_date)
+        // - ModifiedBy (Column: modified_by)
+    }
+}

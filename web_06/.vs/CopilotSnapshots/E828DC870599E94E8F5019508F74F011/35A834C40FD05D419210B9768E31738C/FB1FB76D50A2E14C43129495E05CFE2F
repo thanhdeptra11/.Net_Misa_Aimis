@@ -1,0 +1,57 @@
+﻿using BL.Interface;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Model;
+
+namespace web_06.Controllers
+{
+    [Route("api/v1/[controller]")]
+    [ApiController]
+    public class CustomerController : ControllerBase
+    {
+        private readonly BL.Interface.ICustomerBL _customerBL;
+
+        public CustomerController(ICustomerBL customerBL)
+        {
+            _customerBL = customerBL;
+        }
+
+        [HttpGet]
+        public async Task<Object> GetCustomer()
+        {
+            return await _customerBL.GetAllAsync();
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<Object?> GetCustomerByID(Guid id)
+        {
+            return await _customerBL.GetByIdAsync(id);
+        }
+
+        [HttpPost]
+        public async Task<Object> AddCustomer(Customer customer)
+        {
+            return await _customerBL.AddAsync(customer);
+        }
+
+        [HttpPut]
+        public async Task<Object> UpdateCustomer(Customer customer)
+        {
+            return await _customerBL.UpdateAsync(customer);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<Object> DeleteCustomer(Guid id)
+        {
+            return await _customerBL.DeleteAsync(id);
+        }
+
+        [HttpPost("delete-multiple")]
+        public async Task<Object> DeleteCustomers(IEnumerable<Guid> ids)
+        {
+            return await _customerBL.DeleteMultipleAsync(ids);
+        }
+    }
+}

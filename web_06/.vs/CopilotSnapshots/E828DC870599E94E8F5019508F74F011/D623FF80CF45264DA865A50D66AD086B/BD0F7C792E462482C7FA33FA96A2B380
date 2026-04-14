@@ -1,0 +1,33 @@
+﻿using BL.Interface;
+using DL.Interface;
+using Model;
+
+namespace BL
+{
+    public class SaleOrderDetailBL : BaseBL<SaleOrderDetail>, ISaleOrderDetailBL
+    {
+        private readonly ISaleOrderDetailRepository _repository;
+
+        public SaleOrderDetailBL(ISaleOrderDetailRepository repository) : base(repository)
+        {
+            _repository = repository;
+        }
+
+        // Override AddAsync ?? set ID t? ??ng
+        public override async Task<int> AddAsync(SaleOrderDetail entity)
+        {
+            entity.Id = Guid.NewGuid();
+            entity.CreatedDate = DateTime.UtcNow;
+            return await base.AddAsync(entity);
+        }
+
+        // Override UpdateAsync ?? update ModifiedDate
+        public override async Task<int> UpdateAsync(SaleOrderDetail entity)
+        {
+            entity.ModifiedDate = DateTime.UtcNow;
+            return await base.UpdateAsync(entity);
+        }
+
+        // K? th?a t?t c? CRUD operations khác t? BaseBL<SaleOrderDetail>
+    }
+}

@@ -1,0 +1,26 @@
+﻿using Dapper;
+using DL.Interface;
+using Model;
+
+namespace DL
+{
+    public class CustomerRepository : BaseDL<Customer>, ICustomerRepository
+    {
+        protected override string TableName => "customer";
+
+        public CustomerRepository(IDbConnectionFactory dbFactory) : base(dbFactory)
+        {
+        }
+
+        // Override SQL queries nếu cần custom logic (ví dụ: JOIN, stored procedures)
+        // Nếu không cần, kế thừa tất cả từ BaseDL<Customer>
+
+        // Ví dụ: override GetByIdAsync nếu cần custom query
+        // public override async Task<Customer?> GetByIdAsync(Guid id)
+        // {
+        //     const string query = "SELECT c.*, so.* FROM customer c LEFT JOIN sale_order so ON c.Id = so.CustomerId WHERE c.Id = @Id";
+        //     using var connection = _connectionFactory.CreateConnection();
+        //     return await connection.QueryFirstOrDefaultAsync<Customer>(query, new { Id = id });
+        // }
+    }
+}

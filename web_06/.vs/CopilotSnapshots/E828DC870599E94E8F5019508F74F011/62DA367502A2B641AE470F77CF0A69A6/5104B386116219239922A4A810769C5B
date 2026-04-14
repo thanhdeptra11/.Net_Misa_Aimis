@@ -1,0 +1,11 @@
+﻿namespace BL.Interface
+{
+    public interface ISaleOrderDetailBL : IBaseBL<Model.SaleOrderDetail>
+    {
+        // Kế thừa tất cả CRUD operations từ IBaseBL<SaleOrderDetail>
+        // GetAllAsync(), GetByIdAsync(), AddAsync(), UpdateAsync(), DeleteAsync(), DeleteMultipleAsync()
+        
+        // Method đặc thù cho SaleOrderDetail
+        Task<IEnumerable<Model.SaleOrderDetail>> GetDetailsByOrderIdAsync(Guid saleOrderId);
+    }
+}

@@ -16,5 +16,9 @@ namespace Common.Model
         /// Từ khóa tìm kiếm
         /// </summary>
         public string? SearchTerm { get; set; }
+        /// <summary>
+        /// Filter condition
+        /// </summary>
+        public List<FilterCondition>? Filters { get; set; }
     }
 }

@@ -1,3 +1,4 @@
+using Common.Extension;
 using Common.Model;
 using Dapper;
 using DL.Interface;
@@ -67,18 +68,89 @@ namespace DL.Base
             using var connection = _connectionFactory.CreateConnection();
             return await connection.QueryAsync<T>(query);
         }
+        /// <summary>
+        /// Build câu lệnh filter động kết hợp nhiều điều kiện
+        /// </summary>
+        protected string BuildFilterCondition(
+            List<FilterCondition> filters,
+            DynamicParameters parameters)
+        {
+            if (filters == null || !filters.Any())
+                return "";
 
+            var conditions = new List<string>();
+            int index = 0;
+           
+            foreach (var filter in filters)
+            {
+                //// mapping property -> column trong DB
+                //var prop = _validProperties.FirstOrDefault(p =>
+                //    string.Equals(p.Name, filter.Property, StringComparison.OrdinalIgnoreCase));
+
+                //if (prop == null) continue;
+                //Convert value
+                var convertedValue = ExtensionUtility.ConvertValue(filter.Value, filter.DataType);
+                var columnName = filter.Property; // GetColumnNameStatic(prop);
+                var paramName = $"Param{index}";
+
+                switch (filter.Operator.ToLower())
+                {
+                    case "contains":
+                        conditions.Add($"{columnName} LIKE @{paramName}");
+                        parameters.Add(paramName, $"%{convertedValue}%");
+                        break;
+
+                    case "=":
+                        conditions.Add($"{columnName} = @{paramName}");
+                        parameters.Add(paramName, convertedValue);
+                        break;
+
+                    case ">":
+                    case ">=":
+                    case "<":
+                    case "<=":
+                        conditions.Add($"{columnName} {filter.Operator} @{paramName}");
+                        parameters.Add(paramName, convertedValue);
+                        break;
+
+                    default:
+                        throw new Exception($"Operator {filter.Operator} not supported");
+                }
+
+                index++;
+            }
+
+            return conditions.Any()
+                ? string.Join(" AND ", conditions)
+                : "";
+        }
         public virtual async Task<PagingResponse<T>> GetPagingAsync(PagingRequest request)
         {
             var searchCondition = "";
             var parameters = new DynamicParameters();
-            
+
+            // Dùng câu lệnh filter
+            var filterCondition = BuildFilterCondition(request.Filters, parameters);
+
             if (!string.IsNullOrWhiteSpace(request.SearchTerm) && SearchColumns.Length > 0)
             {
                 var conditions = SearchColumns.Select(c => $"{c} LIKE @SearchTerm");
                 searchCondition = " WHERE " + string.Join(" OR ", conditions);
                 parameters.Add("SearchTerm", $"%{request.SearchTerm}%");
             }
+
+            //Kiểm tra xem có câu query search bằng keyword không
+            if (!string.IsNullOrWhiteSpace(filterCondition))
+            {
+                if (!string.IsNullOrWhiteSpace(searchCondition)) {
+                    searchCondition += " AND " + filterCondition;
+                }
+                else
+                {
+                    searchCondition = " WHERE " + filterCondition;
+                }
+            }
+
 
             var countQuery = $"SELECT COUNT(1) FROM {TableName} {searchCondition}";
             

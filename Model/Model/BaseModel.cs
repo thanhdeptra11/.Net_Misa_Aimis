@@ -7,6 +7,7 @@ namespace Common.Model
     public abstract class BaseModel
     {
         // Default [Column("id")], override ở child class nếu cần (ví dụ: customer_id, sale_order_id)
+
         [Column("id")]
         [JsonPropertyName("id")]
         public virtual Guid Id { get; set; }

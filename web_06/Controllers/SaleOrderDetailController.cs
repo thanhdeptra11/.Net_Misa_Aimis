@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace web_06.Controllers
 {
-    public class SaleOrderDetailController : BasesController<SaleOrderDetail>
+    public class SaleOrderDetailController : BaseController<SaleOrderDetail>
     {
         private readonly ISaleOrderDetailBL _saleOrderDetailBL;
 

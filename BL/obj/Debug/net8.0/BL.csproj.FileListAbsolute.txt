@@ -32,3 +32,4 @@ C:\Users\thanhTran\source\repos\MisaWeb06\BL\obj\Debug\net8.0\BL.dll
 C:\Users\thanhTran\source\repos\MisaWeb06\BL\obj\Debug\net8.0\refint\BL.dll
 C:\Users\thanhTran\source\repos\MisaWeb06\BL\obj\Debug\net8.0\BL.pdb
 C:\Users\thanhTran\source\repos\MisaWeb06\BL\obj\Debug\net8.0\ref\BL.dll
+C:\Users\thanhTran\source\repos\MisaWeb06\BL\obj\Debug\net8.0\BL.sourcelink.json

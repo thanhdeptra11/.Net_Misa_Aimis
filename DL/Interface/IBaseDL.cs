@@ -1,8 +1,11 @@
-﻿namespace DL.Interface
+using Common.Model;
+
+namespace DL.Interface
 {
     public interface IBaseDL<T> where T : class
     {
         Task<IEnumerable<T>> GetAllAsync();
+        Task<PagingResponse<T>> GetPagingAsync(PagingRequest request);
         Task<T?> GetByIdAsync(Guid id);
         Task<int> AddAsync(T entity);
         Task<int> UpdateAsync(T entity);

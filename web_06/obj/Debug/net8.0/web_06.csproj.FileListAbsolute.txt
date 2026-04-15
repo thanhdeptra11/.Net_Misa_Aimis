@@ -82,10 +82,11 @@ C:\Users\thanhTran\source\repos\MisaWeb06\web_06\obj\Debug\net8.0\staticwebasset
 C:\Users\thanhTran\source\repos\MisaWeb06\web_06\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\thanhTran\source\repos\MisaWeb06\web_06\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\thanhTran\source\repos\MisaWeb06\web_06\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\thanhTran\source\repos\MisaWeb06\web_06\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\thanhTran\source\repos\MisaWeb06\web_06\obj\Debug\net8.0\web_06.csproj.Up2Date
 C:\Users\thanhTran\source\repos\MisaWeb06\web_06\obj\Debug\net8.0\web_06.dll
 C:\Users\thanhTran\source\repos\MisaWeb06\web_06\obj\Debug\net8.0\refint\web_06.dll
 C:\Users\thanhTran\source\repos\MisaWeb06\web_06\obj\Debug\net8.0\web_06.pdb
 C:\Users\thanhTran\source\repos\MisaWeb06\web_06\obj\Debug\net8.0\web_06.genruntimeconfig.cache
 C:\Users\thanhTran\source\repos\MisaWeb06\web_06\obj\Debug\net8.0\ref\web_06.dll
+C:\Users\thanhTran\source\repos\MisaWeb06\web_06\obj\Debug\net8.0\web_06.sourcelink.json
+C:\Users\thanhTran\source\repos\MisaWeb06\web_06\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

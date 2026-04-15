@@ -28,3 +28,4 @@ C:\Users\thanhTran\source\repos\MisaWeb06\DL\obj\Debug\net8.0\DL.dll
 C:\Users\thanhTran\source\repos\MisaWeb06\DL\obj\Debug\net8.0\refint\DL.dll
 C:\Users\thanhTran\source\repos\MisaWeb06\DL\obj\Debug\net8.0\DL.pdb
 C:\Users\thanhTran\source\repos\MisaWeb06\DL\obj\Debug\net8.0\ref\DL.dll
+C:\Users\thanhTran\source\repos\MisaWeb06\DL\obj\Debug\net8.0\DL.sourcelink.json

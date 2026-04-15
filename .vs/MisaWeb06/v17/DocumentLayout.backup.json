@@ -3,16 +3,71 @@
   "WorkspaceRootPath": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6EF68C6B-B175-4E40-AB9E-5528FAC97E47}|DL\\DL.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\dl\\base\\basedl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EF68C6B-B175-4E40-AB9E-5528FAC97E47}|DL\\DL.csproj|solutionrelative:dl\\base\\basedl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9679F491-7998-3810-630A-A43D5084D406}|web_06\\web_06.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\web_06\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9679F491-7998-3810-630A-A43D5084D406}|web_06\\web_06.csproj|solutionrelative:web_06\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\thanhTran\\AppData\\Local\\SourceServer\\2e86be66bada7bbd3e4b0544c76c902880187f8e92bb05095e8f249dd4b03b97\\DL\\Base\\BaseDL.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AB3D1D2-2FBC-E1CD-5FF4-750C9E06498E}|Model\\Common.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\model\\model\\basemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AB3D1D2-2FBC-E1CD-5FF4-750C9E06498E}|Model\\Common.csproj|solutionrelative:model\\model\\basemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EF68C6B-B175-4E40-AB9E-5528FAC97E47}|DL\\DL.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\dl\\interface\\iemployeesrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EF68C6B-B175-4E40-AB9E-5528FAC97E47}|DL\\DL.csproj|solutionrelative:dl\\interface\\iemployeesrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD6D681E-C8A8-4413-B1DF-D2834CD08F67}|BL\\BL.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\bl\\service\\employeesbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD6D681E-C8A8-4413-B1DF-D2834CD08F67}|BL\\BL.csproj|solutionrelative:bl\\service\\employeesbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AB3D1D2-2FBC-E1CD-5FF4-750C9E06498E}|Model\\Common.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\model\\model\\employees.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AB3D1D2-2FBC-E1CD-5FF4-750C9E06498E}|Model\\Common.csproj|solutionrelative:model\\model\\employees.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DD6D681E-C8A8-4413-B1DF-D2834CD08F67}|BL\\BL.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\bl\\base\\basebl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD6D681E-C8A8-4413-B1DF-D2834CD08F67}|BL\\BL.csproj|solutionrelative:bl\\base\\basebl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9679F491-7998-3810-630A-A43D5084D406}|web_06\\web_06.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\web_06\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9679F491-7998-3810-630A-A43D5084D406}|web_06\\web_06.csproj|solutionrelative:web_06\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9679F491-7998-3810-630A-A43D5084D406}|web_06\\web_06.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\web_06\\middleware\\exceptionhandlingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9679F491-7998-3810-630A-A43D5084D406}|web_06\\web_06.csproj|solutionrelative:web_06\\middleware\\exceptionhandlingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AB3D1D2-2FBC-E1CD-5FF4-750C9E06498E}|Model\\Common.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\model\\attributes\\uniqueattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AB3D1D2-2FBC-E1CD-5FF4-750C9E06498E}|Model\\Common.csproj|solutionrelative:model\\attributes\\uniqueattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AB3D1D2-2FBC-E1CD-5FF4-750C9E06498E}|Model\\Common.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\model\\attributes\\configtableattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AB3D1D2-2FBC-E1CD-5FF4-750C9E06498E}|Model\\Common.csproj|solutionrelative:model\\attributes\\configtableattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AB3D1D2-2FBC-E1CD-5FF4-750C9E06498E}|Model\\Common.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\model\\extension\\extensionutility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AB3D1D2-2FBC-E1CD-5FF4-750C9E06498E}|Model\\Common.csproj|solutionrelative:model\\extension\\extensionutility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EF68C6B-B175-4E40-AB9E-5528FAC97E47}|DL\\DL.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\dl\\interface\\ibasedl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EF68C6B-B175-4E40-AB9E-5528FAC97E47}|DL\\DL.csproj|solutionrelative:dl\\interface\\ibasedl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EF68C6B-B175-4E40-AB9E-5528FAC97E47}|DL\\DL.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\dl\\infrastructure\\mysqlconnectionfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EF68C6B-B175-4E40-AB9E-5528FAC97E47}|DL\\DL.csproj|solutionrelative:dl\\infrastructure\\mysqlconnectionfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DD6D681E-C8A8-4413-B1DF-D2834CD08F67}|BL\\BL.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\bl\\service\\saleorderbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DD6D681E-C8A8-4413-B1DF-D2834CD08F67}|BL\\BL.csproj|solutionrelative:bl\\service\\saleorderbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DD6D681E-C8A8-4413-B1DF-D2834CD08F67}|BL\\BL.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\bl\\service\\customerbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DD6D681E-C8A8-4413-B1DF-D2834CD08F67}|BL\\BL.csproj|solutionrelative:bl\\service\\customerbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DD6D681E-C8A8-4413-B1DF-D2834CD08F67}|BL\\BL.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\bl\\service\\employeesbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DD6D681E-C8A8-4413-B1DF-D2834CD08F67}|BL\\BL.csproj|solutionrelative:bl\\service\\employeesbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DD6D681E-C8A8-4413-B1DF-D2834CD08F67}|BL\\BL.csproj|c:\\users\\thanhtran\\source\\repos\\misaweb06\\bl\\interface\\iemployeesbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,7 +93,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,7 +109,178 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IEmployeesRepository.cs",
+              "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\DL\\Interface\\IEmployeesRepository.cs",
+              "RelativeDocumentMoniker": "DL\\Interface\\IEmployeesRepository.cs",
+              "ToolTip": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\DL\\Interface\\IEmployeesRepository.cs",
+              "RelativeToolTip": "DL\\Interface\\IEmployeesRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T01:57:05.47Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BaseDL.cs",
+              "DocumentMoniker": "C:\\Users\\thanhTran\\AppData\\Local\\SourceServer\\2e86be66bada7bbd3e4b0544c76c902880187f8e92bb05095e8f249dd4b03b97\\DL\\Base\\BaseDL.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\SourceServer\\2e86be66bada7bbd3e4b0544c76c902880187f8e92bb05095e8f249dd4b03b97\\DL\\Base\\BaseDL.cs",
+              "ToolTip": "C:\\Users\\thanhTran\\AppData\\Local\\SourceServer\\2e86be66bada7bbd3e4b0544c76c902880187f8e92bb05095e8f249dd4b03b97\\DL\\Base\\BaseDL.cs",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\SourceServer\\2e86be66bada7bbd3e4b0544c76c902880187f8e92bb05095e8f249dd4b03b97\\DL\\Base\\BaseDL.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAwwEwAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T01:45:24.345Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Employees.cs",
+              "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\Model\\Model\\Employees.cs",
+              "RelativeDocumentMoniker": "Model\\Model\\Employees.cs",
+              "ToolTip": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\Model\\Model\\Employees.cs",
+              "RelativeToolTip": "Model\\Model\\Employees.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAiwCIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T01:42:33.648Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ExceptionHandlingMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\web_06\\Middleware\\ExceptionHandlingMiddleware.cs",
+              "RelativeDocumentMoniker": "web_06\\Middleware\\ExceptionHandlingMiddleware.cs",
+              "ToolTip": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\web_06\\Middleware\\ExceptionHandlingMiddleware.cs",
+              "RelativeToolTip": "web_06\\Middleware\\ExceptionHandlingMiddleware.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T01:29:17.861Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BaseBL.cs",
+              "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\BL\\Base\\BaseBL.cs",
+              "RelativeDocumentMoniker": "BL\\Base\\BaseBL.cs",
+              "ToolTip": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\BL\\Base\\BaseBL.cs",
+              "RelativeToolTip": "BL\\Base\\BaseBL.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwBUAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T01:28:37.876Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UniqueAttribute.cs",
+              "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\Model\\Attributes\\UniqueAttribute.cs",
+              "RelativeDocumentMoniker": "Model\\Attributes\\UniqueAttribute.cs",
+              "ToolTip": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\Model\\Attributes\\UniqueAttribute.cs",
+              "RelativeToolTip": "Model\\Attributes\\UniqueAttribute.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T01:28:29.172Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ConfigTableAttribute.cs",
+              "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\Model\\Attributes\\ConfigTableAttribute.cs",
+              "RelativeDocumentMoniker": "Model\\Attributes\\ConfigTableAttribute.cs",
+              "ToolTip": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\Model\\Attributes\\ConfigTableAttribute.cs",
+              "RelativeToolTip": "Model\\Attributes\\ConfigTableAttribute.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T01:28:25.533Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ExtensionUtility.cs",
+              "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\Model\\Extension\\ExtensionUtility.cs",
+              "RelativeDocumentMoniker": "Model\\Extension\\ExtensionUtility.cs",
+              "ToolTip": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\Model\\Extension\\ExtensionUtility.cs",
+              "RelativeToolTip": "Model\\Extension\\ExtensionUtility.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAA3wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T01:28:17.069Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IBaseDL.cs",
+              "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\DL\\Interface\\IBaseDL.cs",
+              "RelativeDocumentMoniker": "DL\\Interface\\IBaseDL.cs",
+              "ToolTip": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\DL\\Interface\\IBaseDL.cs",
+              "RelativeToolTip": "DL\\Interface\\IBaseDL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T01:28:04.818Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BaseDL.cs",
+              "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\DL\\Base\\BaseDL.cs",
+              "RelativeDocumentMoniker": "DL\\Base\\BaseDL.cs",
+              "ToolTip": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\DL\\Base\\BaseDL.cs",
+              "RelativeToolTip": "DL\\Base\\BaseDL.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAqwEQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T01:26:00.962Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BaseModel.cs",
+              "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\Model\\Model\\BaseModel.cs",
+              "RelativeDocumentMoniker": "Model\\Model\\BaseModel.cs",
+              "ToolTip": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\Model\\Model\\BaseModel.cs",
+              "RelativeToolTip": "Model\\Model\\BaseModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-14T14:55:09.004Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "MySqlConnectionFactory.cs",
+              "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\DL\\Infrastructure\\MySqlConnectionFactory.cs",
+              "RelativeDocumentMoniker": "DL\\Infrastructure\\MySqlConnectionFactory.cs",
+              "ToolTip": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\DL\\Infrastructure\\MySqlConnectionFactory.cs",
+              "RelativeToolTip": "DL\\Infrastructure\\MySqlConnectionFactory.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAwwA0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-14T14:53:56.097Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "EmployeesController.cs",
+              "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\web_06\\Controllers\\EmployeesController.cs",
+              "RelativeDocumentMoniker": "web_06\\Controllers\\EmployeesController.cs",
+              "ToolTip": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\web_06\\Controllers\\EmployeesController.cs",
+              "RelativeToolTip": "web_06\\Controllers\\EmployeesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-14T14:53:56.114Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "BaseController.cs",
+              "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\web_06\\Controllers\\BaseController.cs",
+              "RelativeDocumentMoniker": "web_06\\Controllers\\BaseController.cs",
+              "ToolTip": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\web_06\\Controllers\\BaseController.cs",
+              "RelativeToolTip": "web_06\\Controllers\\BaseController.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAcwDAAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-14T14:53:56.13Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
               "Title": "CustomerBL.cs",
               "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\BL\\Service\\CustomerBL.cs",
               "RelativeDocumentMoniker": "BL\\Service\\CustomerBL.cs",
@@ -62,12 +288,11 @@
               "RelativeToolTip": "BL\\Service\\CustomerBL.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T14:42:26.902Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-14T14:42:26.902Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 15,
               "Title": "SaleOrderBL.cs",
               "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\BL\\Service\\SaleOrderBL.cs",
               "RelativeDocumentMoniker": "BL\\Service\\SaleOrderBL.cs",
@@ -75,12 +300,11 @@
               "RelativeToolTip": "BL\\Service\\SaleOrderBL.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T14:41:25.677Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-14T14:41:25.677Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 18,
               "Title": "ISaleOrderBL.cs",
               "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\BL\\Interface\\ISaleOrderBL.cs",
               "RelativeDocumentMoniker": "BL\\Interface\\ISaleOrderBL.cs",
@@ -88,25 +312,23 @@
               "RelativeToolTip": "BL\\Interface\\ISaleOrderBL.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T14:41:17.986Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-14T14:41:17.986Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "EmployeesBL.cs",
               "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\BL\\Service\\EmployeesBL.cs",
               "RelativeDocumentMoniker": "BL\\Service\\EmployeesBL.cs",
               "ToolTip": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\BL\\Service\\EmployeesBL.cs",
               "RelativeToolTip": "BL\\Service\\EmployeesBL.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAewAoAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAewA4AAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T14:40:52.546Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-14T14:40:52.546Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 20,
               "Title": "ICustomerBL.cs",
               "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\BL\\Interface\\ICustomerBL.cs",
               "RelativeDocumentMoniker": "BL\\Interface\\ICustomerBL.cs",
@@ -114,12 +336,11 @@
               "RelativeToolTip": "BL\\Interface\\ICustomerBL.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T14:38:06.925Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-14T14:38:06.925Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 17,
               "Title": "IEmployeesBL.cs",
               "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\BL\\Interface\\IEmployeesBL.cs",
               "RelativeDocumentMoniker": "BL\\Interface\\IEmployeesBL.cs",
@@ -127,12 +348,11 @@
               "RelativeToolTip": "BL\\Interface\\IEmployeesBL.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T14:38:00.389Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-14T14:38:00.389Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 19,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\thanhTran\\source\\repos\\MisaWeb06\\web_06\\Program.cs",
               "RelativeDocumentMoniker": "web_06\\Program.cs",
@@ -140,8 +360,7 @@
               "RelativeToolTip": "web_06\\Program.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-14T14:37:21.989Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-14T14:37:21.989Z"
             }
           ]
         }

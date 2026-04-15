@@ -1,15 +1,16 @@
-﻿using BL.Interface;
+using BL.Interface;
+using Common.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace web_06.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public abstract class BasesController<T> : ControllerBase where T : class
+    public abstract class BaseController<T> : ControllerBase where T : class
     {
         protected readonly IBaseBL<T> _baseBL;
 
-        public BasesController(IBaseBL<T> baseBL)
+        public BaseController(IBaseBL<T> baseBL)
         {
             _baseBL = baseBL;
         }
@@ -18,6 +19,13 @@ namespace web_06.Controllers
         public virtual async Task<IActionResult> GetAll()
         {
             var result = await _baseBL.GetAllAsync();
+            return Ok(result);
+        }
+
+        [HttpPost("filter")]
+        public virtual async Task<IActionResult> Filter([FromBody] PagingRequest request)
+        {
+            var result = await _baseBL.GetPagingAsync(request);
             return Ok(result);
         }
 

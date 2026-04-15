@@ -1,4 +1,5 @@
-﻿using Dapper;
+using Common.Model;
+using Dapper;
 using DL.Interface;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,11 @@ namespace DL.Base
         protected virtual string IdColumnName => "id";
         protected virtual string IdPropertyName => "Id";
 
+        // Mảng chứa các cột dùng để query LIKE khi có SearchTerm (cần overide ở class con)
+        protected virtual string[] SearchColumns => Array.Empty<string>();
 
-        // CACHE TĨNH CHO TỪNG KIỂU T (Chỉ chạy 1 lần duy nhất trong suốt vòng đời App)
+
+        // Cache tĩnh từng kiểu T
 
         private static readonly string _selectColumns;
         private static readonly string _insertColumns;
@@ -28,7 +32,7 @@ namespace DL.Base
 
         static BaseDL()
         {
-            // Lọc ra các property có thể đọc và KHÔNG có attribute [NotMapped]
+            // Lọc ra các property có thể đọc và không có attribute [NotMapped]
             _validProperties = typeof(T).GetProperties()
                 .Where(p => p.CanRead && p.GetCustomAttribute<NotMappedAttribute>() == null)
                 .ToArray();
@@ -62,6 +66,35 @@ namespace DL.Base
             string query = $"SELECT {_selectColumns} FROM {TableName}";
             using var connection = _connectionFactory.CreateConnection();
             return await connection.QueryAsync<T>(query);
+        }
+
+        public virtual async Task<PagingResponse<T>> GetPagingAsync(PagingRequest request)
+        {
+            var searchCondition = "";
+            var parameters = new DynamicParameters();
+            
+            if (!string.IsNullOrWhiteSpace(request.SearchTerm) && SearchColumns.Length > 0)
+            {
+                var conditions = SearchColumns.Select(c => $"{c} LIKE @SearchTerm");
+                searchCondition = " WHERE " + string.Join(" OR ", conditions);
+                parameters.Add("SearchTerm", $"%{request.SearchTerm}%");
+            }
+
+            var countQuery = $"SELECT COUNT(1) FROM {TableName} {searchCondition}";
+            
+            parameters.Add("Limit", request.PageSize);
+            parameters.Add("Offset", (request.PageNumber - 1) * request.PageSize);
+            
+            var dataQuery = $"SELECT {_selectColumns} FROM {TableName} {searchCondition} ORDER BY {IdColumnName} DESC LIMIT @Limit OFFSET @Offset";
+
+            using var connection = _connectionFactory.CreateConnection();
+            
+            var totalRecords = await connection.ExecuteScalarAsync<long>(countQuery, parameters);
+            var data = await connection.QueryAsync<T>(dataQuery, parameters);
+            
+            var totalPages = totalRecords > 0 ? (int)Math.Ceiling(totalRecords / (double)request.PageSize) : 0;
+
+            return new PagingResponse<T>(totalRecords, totalPages, data);
         }
 
         public virtual async Task<T?> GetByIdAsync(Guid id)

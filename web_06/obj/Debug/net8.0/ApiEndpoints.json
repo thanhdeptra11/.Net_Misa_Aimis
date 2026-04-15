@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "GetAll",
     "RelativePath": "api/v1/Customer",
     "HttpMethod": "GET",
@@ -10,7 +10,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "Add",
     "RelativePath": "api/v1/Customer",
     "HttpMethod": "POST",
@@ -26,7 +26,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "Update",
     "RelativePath": "api/v1/Customer",
     "HttpMethod": "PUT",
@@ -42,7 +42,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "GetById",
     "RelativePath": "api/v1/Customer/{id}",
     "HttpMethod": "GET",
@@ -58,7 +58,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "Delete",
     "RelativePath": "api/v1/Customer/{id}",
     "HttpMethod": "DELETE",
@@ -74,7 +74,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "DeleteMultiple",
     "RelativePath": "api/v1/Customer/delete-multiple",
     "HttpMethod": "POST",
@@ -90,7 +90,23 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "Filter",
+    "RelativePath": "api/v1/Customer/filter",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Common.Model.PagingRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Customer, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "SaveBatch",
     "RelativePath": "api/v1/Customer/save-batch",
     "HttpMethod": "POST",
@@ -106,7 +122,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "GetAll",
     "RelativePath": "api/v1/Employees",
     "HttpMethod": "GET",
@@ -116,7 +132,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "Add",
     "RelativePath": "api/v1/Employees",
     "HttpMethod": "POST",
@@ -132,7 +148,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "Update",
     "RelativePath": "api/v1/Employees",
     "HttpMethod": "PUT",
@@ -148,7 +164,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "GetById",
     "RelativePath": "api/v1/Employees/{id}",
     "HttpMethod": "GET",
@@ -164,7 +180,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "Delete",
     "RelativePath": "api/v1/Employees/{id}",
     "HttpMethod": "DELETE",
@@ -180,7 +196,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "DeleteMultiple",
     "RelativePath": "api/v1/Employees/delete-multiple",
     "HttpMethod": "POST",
@@ -196,7 +212,23 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "Filter",
+    "RelativePath": "api/v1/Employees/filter",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Common.Model.PagingRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.Employees, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "SaveBatch",
     "RelativePath": "api/v1/Employees/save-batch",
     "HttpMethod": "POST",
@@ -212,7 +244,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "GetAll",
     "RelativePath": "api/v1/SaleOrder",
     "HttpMethod": "GET",
@@ -222,7 +254,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "Add",
     "RelativePath": "api/v1/SaleOrder",
     "HttpMethod": "POST",
@@ -238,7 +270,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "Update",
     "RelativePath": "api/v1/SaleOrder",
     "HttpMethod": "PUT",
@@ -254,7 +286,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "GetById",
     "RelativePath": "api/v1/SaleOrder/{id}",
     "HttpMethod": "GET",
@@ -270,7 +302,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "Delete",
     "RelativePath": "api/v1/SaleOrder/{id}",
     "HttpMethod": "DELETE",
@@ -286,7 +318,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "DeleteMultiple",
     "RelativePath": "api/v1/SaleOrder/delete-multiple",
     "HttpMethod": "POST",
@@ -302,7 +334,23 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "Filter",
+    "RelativePath": "api/v1/SaleOrder/filter",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Common.Model.PagingRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrder, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "SaveBatch",
     "RelativePath": "api/v1/SaleOrder/save-batch",
     "HttpMethod": "POST",
@@ -318,7 +366,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "GetAll",
     "RelativePath": "api/v1/SaleOrderDetail",
     "HttpMethod": "GET",
@@ -328,7 +376,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "Add",
     "RelativePath": "api/v1/SaleOrderDetail",
     "HttpMethod": "POST",
@@ -344,7 +392,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "Update",
     "RelativePath": "api/v1/SaleOrderDetail",
     "HttpMethod": "PUT",
@@ -360,7 +408,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "GetById",
     "RelativePath": "api/v1/SaleOrderDetail/{id}",
     "HttpMethod": "GET",
@@ -376,7 +424,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "Delete",
     "RelativePath": "api/v1/SaleOrderDetail/{id}",
     "HttpMethod": "DELETE",
@@ -408,7 +456,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "DeleteMultiple",
     "RelativePath": "api/v1/SaleOrderDetail/delete-multiple",
     "HttpMethod": "POST",
@@ -424,7 +472,23 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BasesController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+    "Method": "Filter",
+    "RelativePath": "api/v1/SaleOrderDetail/filter",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Common.Model.PagingRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "web_06.Controllers.BaseController\u00601[[Common.Model.SaleOrderDetail, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
     "Method": "SaveBatch",
     "RelativePath": "api/v1/SaleOrderDetail/save-batch",
     "HttpMethod": "POST",

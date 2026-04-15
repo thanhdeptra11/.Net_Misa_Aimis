@@ -21,6 +21,11 @@ namespace BL.Base
             return await _baseDL.GetAllAsync();
         }
 
+        public virtual async Task<PagingResponse<T>> GetPagingAsync(PagingRequest request)
+        {
+            return await _baseDL.GetPagingAsync(request);
+        }
+
         /// <summary>
         /// Lưu dữ liệu hàng loạt (Insert/Update/Delete) với trạng thái
         /// </summary>

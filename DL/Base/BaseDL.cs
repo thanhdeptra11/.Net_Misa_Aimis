@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DL.Base
 {
-    public abstract class BaseDL<T> : IBaseDL<T> where T : class
+    public abstract class BaseDL<T, TId> : IBaseDL<T, TId> where T : class
     {
         protected readonly IDbConnectionFactory _connectionFactory;
         protected abstract string TableName { get; }
@@ -61,7 +61,8 @@ namespace DL.Base
         {
             _connectionFactory = connectionFactory;
         }
-
+    
+        
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             string query = $"SELECT {_selectColumns} FROM {TableName}";
@@ -169,7 +170,7 @@ namespace DL.Base
             return new PagingResponse<T>(totalRecords, totalPages, data);
         }
 
-        public virtual async Task<T?> GetByIdAsync(Guid id)
+        public virtual async Task<T?> GetByIdAsync(TId id)
         {
             string query = $"SELECT {_selectColumns} FROM {TableName} WHERE {IdColumnName} = @Id";
             using var connection = _connectionFactory.CreateConnection();
@@ -195,21 +196,21 @@ namespace DL.Base
             return await connection.ExecuteAsync(query, entity);
         }
 
-        public virtual async Task<int> DeleteAsync(Guid id)
+        public virtual async Task<int> DeleteAsync(TId id)
         {
             string query = $"DELETE FROM {TableName} WHERE {IdColumnName} = @Id";
             using var connection = _connectionFactory.CreateConnection();
             return await connection.ExecuteAsync(query, new { Id = id });
         }
 
-        public virtual async Task<int> DeleteMultipleAsync(IEnumerable<Guid> ids)
+        public virtual async Task<int> DeleteMultipleAsync(IEnumerable<TId> ids)
         {
             string query = $"DELETE FROM {TableName} WHERE {IdColumnName} IN @Ids";
             using var connection = _connectionFactory.CreateConnection();
             return await connection.ExecuteAsync(query, new { Ids = ids });
         }
         // Kiểm tra trùng lặp giá trị của một property (cột) nào đó, có thể loại trừ một Id nhất định (dành cho update)
-        public async Task<bool> CheckDupblicate(string propertyName, object value, Guid? excludeId = null)
+        public async Task<bool> CheckDupblicate(string propertyName, object value, object? excludeId = null)
         {
             if (string.IsNullOrWhiteSpace(propertyName))
                 throw new ArgumentException("propertyName is required", nameof(propertyName));
@@ -225,14 +226,21 @@ namespace DL.Base
             if (value == null) return false;
             // Nếu value không null thì dùng = để so sánh
             var query = $"SELECT COUNT(1) FROM {TableName} WHERE {columnName} = @Value";
-            if (excludeId.HasValue)
+            if (excludeId != null)
             {
                 query += $" AND {IdColumnName} <> @ExcludeId";
-                var cnt = await connection.ExecuteScalarAsync<int>(query, new { Value = value, ExcludeId = excludeId.Value });
+                var cnt = await connection.ExecuteScalarAsync<int>(query, new { Value = value, ExcludeId = excludeId });
                 return cnt > 0;
             }
             var cntDefault = await connection.ExecuteScalarAsync<int>(query, new { Value = value });
             return cntDefault > 0;
+        }
+    }
+
+    public abstract class BaseDL<T> : BaseDL<T, Guid>, IBaseDL<T> where T : class
+    {
+        public BaseDL(IDbConnectionFactory connectionFactory) : base(connectionFactory)
+        {
         }
     }
 }

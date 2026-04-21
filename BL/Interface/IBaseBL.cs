@@ -8,15 +8,19 @@ using Common.Model;
 
 namespace BL.Interface
 {
-    public interface IBaseBL<T> where T : class
+    public interface IBaseBL<TEntity, TId> where TEntity : class
     {
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<PagingResponse<T>> GetPagingAsync(PagingRequest request);
-        Task<T?> GetByIdAsync(Guid id);
-        Task<int> AddAsync(T entity);
-        Task<int> UpdateAsync(T entity);
-        Task<int> DeleteAsync(Guid id);
-        Task<int> DeleteMultipleAsync(IEnumerable<Guid> ids);
-        Task<int> SaveDataAsync(List<T> entities);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<PagingResponse<TEntity>> GetPagingAsync(PagingRequest request);
+        Task<TEntity?> GetByIdAsync(TId id);
+        Task<int> AddAsync(TEntity entity);
+        Task<int> UpdateAsync(TEntity entity);
+        Task<int> DeleteAsync(TId id);
+        Task<int> DeleteMultipleAsync(IEnumerable<TId> ids);
+        Task<int> SaveDataAsync(List<TEntity> entities);
+    }
+
+    public interface IBaseBL<T> : IBaseBL<T, Guid> where T : class
+    {
     }
 }

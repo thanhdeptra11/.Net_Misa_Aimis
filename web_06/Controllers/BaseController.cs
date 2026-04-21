@@ -4,13 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace web_06.Controllers
 {
-    [Route("api/v1/[controller]")]
     [ApiController]
-    public abstract class BaseController<T> : ControllerBase where T : class
+    public abstract class BaseController<T, TId> : ControllerBase where T : class
     {
-        protected readonly IBaseBL<T> _baseBL;
+        protected readonly IBaseBL<T, TId> _baseBL;
 
-        public BaseController(IBaseBL<T> baseBL)
+        public BaseController(IBaseBL<T, TId> baseBL)
         {
             _baseBL = baseBL;
         }
@@ -30,7 +29,7 @@ namespace web_06.Controllers
         }
 
         [HttpGet("{id}")]
-        public virtual async Task<IActionResult> GetById(Guid id)
+        public virtual async Task<IActionResult> GetById(TId id)
         {
             var result = await _baseBL.GetByIdAsync(id);
             if (result == null)
@@ -53,7 +52,7 @@ namespace web_06.Controllers
         }
 
         [HttpDelete("{id}")]
-        public virtual async Task<IActionResult> Delete(Guid id)
+        public virtual async Task<IActionResult> Delete(TId id)
         {
             var result = await _baseBL.DeleteAsync(id);
             if (result == 0)
@@ -62,7 +61,7 @@ namespace web_06.Controllers
         }
 
         [HttpPost("delete-multiple")]
-        public virtual async Task<IActionResult> DeleteMultiple([FromBody] IEnumerable<Guid> ids)
+        public virtual async Task<IActionResult> DeleteMultiple([FromBody] IEnumerable<TId> ids)
         {
             var result = await _baseBL.DeleteMultipleAsync(ids);
             return Ok(new { message = Common.Resources.Messages.DeletedSuccessfully, affectedRows = result });
@@ -92,6 +91,14 @@ namespace web_06.Controllers
             {
                 return StatusCode(500, new { message = "An error occurred while saving batch data", error = ex.Message });
             }
+        }
+    }
+
+    [Route("api/v1/[controller]")]
+    public abstract class BaseController<T> : BaseController<T, Guid> where T : class
+    {
+        public BaseController(IBaseBL<T> baseBL) : base(baseBL)
+        {
         }
     }
 }

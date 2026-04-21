@@ -7,11 +7,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BL.Base
 {
-    public abstract class BaseBL<T> : Interface.IBaseBL<T> where T : BaseModel
+    public abstract class BaseBL<T, TId> : Interface.IBaseBL<T, TId> where T : BaseModel<TId>
     {
-        protected IBaseDL<T> _baseDL;
+        protected IBaseDL<T, TId> _baseDL;
 
-        public BaseBL(IBaseDL<T> baseDL)
+        public BaseBL(IBaseDL<T, TId> baseDL)
         {
             _baseDL = baseDL;
         }
@@ -86,16 +86,19 @@ namespace BL.Base
             await Task.CompletedTask;
         }
 
-        public virtual async Task<T?> GetByIdAsync(Guid id)
+        public virtual async Task<T?> GetByIdAsync(TId id)
         {
             return await _baseDL.GetByIdAsync(id);
         }
 
         public virtual async Task<int> AddAsync(T entity)
         {
-            if (entity.Id == Guid.Empty)
+            if (EqualityComparer<TId>.Default.Equals(entity.Id, default))
             {
-                entity.Id = Guid.NewGuid();
+                if (typeof(TId) == typeof(Guid))
+                {
+                    entity.Id = (TId)(object)Guid.NewGuid();
+                }
             }
             entity.CreatedDate = DateTime.UtcNow;
 
@@ -113,15 +116,16 @@ namespace BL.Base
             return await _baseDL.UpdateAsync(entity);
         }
 
-        public virtual async Task<int> DeleteAsync(Guid id)
+        public virtual async Task<int> DeleteAsync(TId id)
         {
             return await _baseDL.DeleteAsync(id);
         }
 
-        public virtual async Task<int> DeleteMultipleAsync(IEnumerable<Guid> ids)
+        public virtual async Task<int> DeleteMultipleAsync(IEnumerable<TId> ids)
         {
             return await _baseDL.DeleteMultipleAsync(ids);
         }
+        
         public async Task<bool> ValidateBusinessRulesAsync(T entity, bool isUpdate = false)
         {
             var listProrerty = typeof(T).GetProperties();
@@ -138,13 +142,7 @@ namespace BL.Base
                         throw new ValidationException(string.Format(Common.Resources.Messages.FieldIsRequired, display));
                     }
                 }
-                //var keyProperty = typeof(T).GetProperties().FirstOrDefault(p => p.GetCustomAttributes(typeof(KeyAttribute), false).Any());
-
-                //if (keyProperty != null)
-                //{
-                //    var keyName = keyProperty.Name;
-                //    // Xử lý logic với keyName ở đây
-                //}
+                
                 // Kiểm tra unique nếu property có attribute [Unique]
                 var uniqueAttribute = property.GetCustomAttributes(typeof(UniqueAttribute), false).FirstOrDefault() as UniqueAttribute;
                 if (uniqueAttribute != null)
@@ -154,14 +152,13 @@ namespace BL.Base
                     if (value != null)
                     {
                         // Chỉ set excludeId khi UPDATE để không loại trừ record hiện tại
-                        Guid? excludeId = null;
+                        object? excludeId = null;
                         if (isUpdate)
                         {
                             var idProp = typeof(T).GetProperty("Id");
                             if (idProp != null)
                             {
-                                var idVal = idProp.GetValue(entity);
-                                if (idVal is Guid g && g != Guid.Empty) excludeId = g;
+                                excludeId = idProp.GetValue(entity);
                             }
                         }
 
@@ -176,6 +173,13 @@ namespace BL.Base
             }
             // Mặc định trả về true, các BL cụ thể có thể override để thêm logic validate riêng
             return await Task.FromResult(true);
+        }
+    }
+
+    public abstract class BaseBL<T> : BaseBL<T, Guid>, Interface.IBaseBL<T> where T : BaseModel
+    {
+        public BaseBL(IBaseDL<T> baseDL) : base(baseDL)
+        {
         }
     }
 }

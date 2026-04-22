@@ -1,17 +1,20 @@
-# Visual Studio
-.vs/
-*.suo
-*.user
-*.cache
-*.dll
-
 # Build folders
 bin/
 obj/
 
-# Logs
-*.log
+# Visual Studio
+.vs/
 
-# OS
-.DS_Store
-Thumbs.db
+# User files
+*.user
+*.suo
+
+# Cache
+*.cache
+
+# SQLite temp
+*.db-shm
+*.db-wal
+
+# Auto generated
+*.AssemblyInfo.cs

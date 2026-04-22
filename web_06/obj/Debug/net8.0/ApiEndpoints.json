@@ -42,7 +42,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BaseController\u00602[[Common.Model.Candidates, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "ContainingType": "web_06.Controllers.CandidatesController",
     "Method": "GetById",
     "RelativePath": "api/v1/Candidates/{id}",
     "HttpMethod": "GET",
@@ -90,7 +90,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "web_06.Controllers.BaseController\u00602[[Common.Model.Candidates, Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+    "ContainingType": "web_06.Controllers.CandidatesController",
     "Method": "Filter",
     "RelativePath": "api/v1/Candidates/filter",
     "HttpMethod": "POST",

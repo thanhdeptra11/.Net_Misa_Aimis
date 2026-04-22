@@ -3,6 +3,7 @@
 *.suo
 *.user
 *.cache
+*.dll
 
 # Build folders
 bin/

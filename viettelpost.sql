@@ -11,7 +11,7 @@
  Target Server Version : 80031 (8.0.31)
  File Encoding         : 65001
 
- Date: 22/04/2026 02:56:11
+ Date: 22/04/2026 14:14:54
 */
 
 SET NAMES utf8mb4;
@@ -33,6 +33,10 @@ CREATE TABLE `candidates`  (
   `candidate_ward` int NULL DEFAULT NULL,
   `candidate_address_detail` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `candidate_email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `create_date` datetime NULL DEFAULT NULL,
+  `create_by` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `modified_date` datetime NULL DEFAULT NULL,
+  `modified_by` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   INDEX `fk_country`(`candidate_country` ASC) USING BTREE,
   INDEX `fk_province`(`candidate_province` ASC) USING BTREE,
   INDEX `fk_ward`(`candidate_ward` ASC) USING BTREE,
@@ -97,6 +101,12 @@ CREATE TABLE `systemkey`  (
   INDEX `Index_Id`(`ID` ASC) USING BTREE,
   INDEX `Index_CodeValue`(`ParentID` ASC, `CodeValue` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 251 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- View structure for candidateswithregion
+-- ----------------------------
+DROP VIEW IF EXISTS `candidateswithregion`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `candidateswithregion` AS select `c`.`candidate_id` AS `candidate_id`,`c`.`candidate_name` AS `candidate_name`,`c`.`candidate_dob` AS `candidate_dob`,`c`.`candidate_phone_number` AS `candidate_phone_number`,`c`.`candidate_email` AS `candidate_email`,`c`.`candidate_gender` AS `candidate_gender`,`country`.`RegionName` AS `country_name`,`province`.`RegionName` AS `province_name`,`ward`.`RegionName` AS `ward_name`,`c`.`candidate_address_detail` AS `candidate_address_detail` from (((`candidates` `c` left join `region2` `country` on((`country`.`RegionID` = `c`.`candidate_country`))) left join `region2` `province` on((`province`.`RegionID` = `c`.`candidate_province`))) left join `region2` `ward` on((`ward`.`RegionID` = `c`.`candidate_ward`)));
 
 -- ----------------------------
 -- Procedure structure for usp_logerror_InsertError

@@ -41,50 +41,13 @@ namespace DL.Repository
 
         public async Task<PagingResponse<Common.DTO.CandidateDto>> GetPagingDtoAsync(PagingRequest request)
         {
-            var searchCondition = "";
-            var parameters = new Dapper.DynamicParameters();
-
-            // Dùng câu lệnh filter có sẵn
-            var filterCondition = BuildFilterCondition(request.Filters, parameters);
-
-            if (!string.IsNullOrWhiteSpace(request.SearchTerm) && SearchColumns.Length > 0)
-            {
-                var conditions = System.Linq.Enumerable.Select(SearchColumns, c => $"c.{c} LIKE @SearchTerm");
-                searchCondition = " WHERE (" + string.Join(" OR ", conditions) + ")";
-                parameters.Add("SearchTerm", $"%{request.SearchTerm}%");
-            }
-
-            if (!string.IsNullOrWhiteSpace(filterCondition))
-            {
-                if (!string.IsNullOrWhiteSpace(searchCondition)) {
-                    searchCondition += " AND " + filterCondition;
-                }
-                else
-                {
-                    searchCondition = " WHERE " + filterCondition;
-                }
-            }
-
-            var countQuery = $"SELECT COUNT(1) FROM candidates c {searchCondition}";
-            
-            parameters.Add("Limit", request.PageSize);
-            parameters.Add("Offset", (request.PageNumber - 1) * request.PageSize);
-            
-            var dataQuery = $@"
-                SELECT {_selectWithMapColumns} 
-                {_baseJoinSql}
-                {searchCondition} 
-                ORDER BY c.{IdColumnName} DESC 
-                LIMIT @Limit OFFSET @Offset";
-
-            using var connection = _connectionFactory.CreateConnection();
-            
-            var totalRecords = await connection.ExecuteScalarAsync<long>(countQuery, parameters);
-            var data = await connection.QueryAsync<Common.DTO.CandidateDto>(dataQuery, parameters);
-            
-            var totalPages = totalRecords > 0 ? (int)Math.Ceiling(totalRecords / (double)request.PageSize) : 0;
-
-            return new PagingResponse<Common.DTO.CandidateDto>(totalRecords, totalPages, data);
+            return await GetPagingCustomAsync<Common.DTO.CandidateDto>(
+                request,
+                selectClause: _selectWithMapColumns,
+                fromAndJoinClause: _baseJoinSql,
+                tableAlias: "c",
+                orderByClause: "c.create_date DESC"
+            );
         }
 
         public async Task<Common.DTO.CandidateDto?> GetDtoByIdAsync(Guid id)

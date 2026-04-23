@@ -61,8 +61,8 @@ namespace DL.Base
         {
             _connectionFactory = connectionFactory;
         }
-    
-        
+
+
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             string query = $"SELECT {_selectColumns} FROM {TableName}";
@@ -81,7 +81,7 @@ namespace DL.Base
 
             var conditions = new List<string>();
             int index = 0;
-           
+
             foreach (var filter in filters)
             {
                 //// mapping property -> column trong DB
@@ -127,6 +127,24 @@ namespace DL.Base
         }
         public virtual async Task<PagingResponse<T>> GetPagingAsync(PagingRequest request)
         {
+            return await GetPagingCustomAsync<T>(
+                request,
+                selectClause: _selectColumns,
+                fromAndJoinClause: $"FROM {TableName}"
+            );
+        }
+
+        /// <summary>
+        /// Hàm hỗ trợ phân trang cho các query phức tạp (có JOIN) và trả về DTO thay vì Entity gốc.
+        /// Giúp tái sử dụng lại logic phân trang, search, filter cho các repository con.
+        /// </summary>
+        protected async Task<PagingResponse<TDto>> GetPagingCustomAsync<TDto>(
+            PagingRequest request, 
+            string selectClause, 
+            string fromAndJoinClause,
+            string tableAlias = "",
+            string? orderByClause = null)
+        {
             var searchCondition = "";
             var parameters = new DynamicParameters();
 
@@ -135,12 +153,13 @@ namespace DL.Base
 
             if (!string.IsNullOrWhiteSpace(request.SearchTerm) && SearchColumns.Length > 0)
             {
-                var conditions = SearchColumns.Select(c => $"{c} LIKE @SearchTerm");
-                searchCondition = " WHERE " + string.Join(" OR ", conditions);
+                var prefix = string.IsNullOrEmpty(tableAlias) ? "" : $"{tableAlias}.";
+                var conditions = SearchColumns.Select(c => $"{prefix}{c} LIKE @SearchTerm");
+                searchCondition = " WHERE (" + string.Join(" OR ", conditions) + ")";
                 parameters.Add("SearchTerm", $"%{request.SearchTerm}%");
             }
 
-            //Kiểm tra xem có câu query search bằng keyword không
+            // Kết hợp điều kiện search và filter
             if (!string.IsNullOrWhiteSpace(filterCondition))
             {
                 if (!string.IsNullOrWhiteSpace(searchCondition)) {
@@ -152,22 +171,23 @@ namespace DL.Base
                 }
             }
 
-
-            var countQuery = $"SELECT COUNT(1) FROM {TableName} {searchCondition}";
+            var countQuery = $"SELECT COUNT(1) {fromAndJoinClause} {searchCondition}";
             
             parameters.Add("Limit", request.PageSize);
             parameters.Add("Offset", (request.PageNumber - 1) * request.PageSize);
             
-            var dataQuery = $"SELECT {_selectColumns} FROM {TableName} {searchCondition} ORDER BY {IdColumnName} DESC LIMIT @Limit OFFSET @Offset";
+            var prefixId = string.IsNullOrEmpty(tableAlias) ? "" : $"{tableAlias}.";
+            var orderBy = string.IsNullOrWhiteSpace(orderByClause) ? $"{prefixId}{IdColumnName} DESC" : orderByClause;
+            var dataQuery = $"SELECT {selectClause} {fromAndJoinClause} {searchCondition} ORDER BY {orderBy} LIMIT @Limit OFFSET @Offset";
 
             using var connection = _connectionFactory.CreateConnection();
             
             var totalRecords = await connection.ExecuteScalarAsync<long>(countQuery, parameters);
-            var data = await connection.QueryAsync<T>(dataQuery, parameters);
+            var data = await connection.QueryAsync<TDto>(dataQuery, parameters);
             
             var totalPages = totalRecords > 0 ? (int)Math.Ceiling(totalRecords / (double)request.PageSize) : 0;
 
-            return new PagingResponse<T>(totalRecords, totalPages, data);
+            return new PagingResponse<TDto>(totalRecords, totalPages, data);
         }
 
         public virtual async Task<T?> GetByIdAsync(TId id)

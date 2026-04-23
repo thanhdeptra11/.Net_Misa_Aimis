@@ -50,17 +50,5 @@ namespace Common.Model
         [JsonPropertyName("candidateAddressDetail")]
         public string? CandidateAddressDetail { get; set; }
 
-        // Bảng không có cột lưu thời gian/người tạọ -> bỏ qua mapping tránh lỗi SQL
-        [NotMapped]
-        public override DateTime CreatedDate { get; set; }
-
-        [NotMapped]
-        public override string? CreatedBy { get; set; }
-
-        [NotMapped]
-        public override DateTime? ModifiedDate { get; set; }
-
-        [NotMapped]
-        public override string? ModifiedBy { get; set; }
     }
 }

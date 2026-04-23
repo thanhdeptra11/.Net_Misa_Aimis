@@ -1,0 +1,20 @@
+# Build folders
+bin/
+obj/
+
+# Visual Studio
+.vs/
+
+# User files
+*.user
+*.suo
+
+# Cache
+*.cache
+
+# SQLite temp
+*.db-shm
+*.db-wal
+
+# Auto generated
+*.AssemblyInfo.cs

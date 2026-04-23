@@ -1,9 +1,0 @@
-﻿using System;
-
-namespace BL.Attributes
-{
-    [AttributeUsage(AttributeTargets.Property)]
-    public class UniqueAttribute : Attribute
-    {
-    }
-}

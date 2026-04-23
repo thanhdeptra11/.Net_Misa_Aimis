@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Common.Extension
@@ -65,6 +66,37 @@ namespace Common.Extension
 
             // Nếu có [Column] thì lấy tên trong [Column], nếu không có thì lấy luôn tên Property
             return columnAttribute != null ? columnAttribute.Name : keyProperty.Name;
+        }
+        public static object? ConvertValue(object? value, string dataType)
+        {
+            if (value is JsonElement json)
+            {
+                switch (dataType.ToLower())
+                {
+                    case "string":
+                        return json.GetString();
+
+                    case "int":
+                        return json.GetInt32();
+
+                    case "long":
+                        return json.GetInt64();
+
+                    case "double":
+                        return json.GetDouble();
+
+                    case "bool":
+                        return json.GetBoolean();
+
+                    case "datetime":
+                        return json.GetDateTime();
+
+                    default:
+                        return json.ToString();
+                }
+            }
+
+            return value;
         }
     }
 }

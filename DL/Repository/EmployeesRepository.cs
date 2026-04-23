@@ -13,9 +13,11 @@ namespace DL.Repository
     {
         protected override string TableName => "employees";
         protected override string IdColumnName => "employee_id";
+        protected override string[] SearchColumns => ["employee_name", "modified_by"];
         public EmployeesRepository(IDbConnectionFactory connectionFactory) : base(connectionFactory)
         {
         }
+        
 
        
     }

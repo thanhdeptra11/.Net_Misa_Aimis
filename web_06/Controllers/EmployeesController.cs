@@ -3,7 +3,7 @@ using Common.Model;
 
 namespace web_06.Controllers
 {
-    public class EmployeesController : BasesController<Employees>
+    public class EmployeesController : BaseController<Employees>
     {
         public EmployeesController(IBaseBL<Employees> baseBL) : base(baseBL)
         {

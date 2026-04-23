@@ -15,5 +15,6 @@ namespace BL.Service
         public EmployeesBL(IBaseDL<Employees> baseDL) : base(baseDL)
         {
         }
+        
     }
 }

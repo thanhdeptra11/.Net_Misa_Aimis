@@ -4,6 +4,7 @@ using Common.Model;
 using DL;
 using DL.Interface;
 using DL.Repository;
+using Model.Model;
 
 namespace web_06
 {
@@ -22,31 +23,34 @@ namespace web_06
 
             builder.Services.AddSingleton<IDbConnectionFactory, MySqlConnectionFactory>();
 
-            // Register Customer DL & BL
-            builder.Services.AddScoped<DL.Interface.ICustomerRepository, CustomerRepository>();
-            builder.Services.AddScoped<DL.Interface.IBaseDL<Customer>, CustomerRepository>();
-            builder.Services.AddScoped<BL.Interface.ICustomerBL, CustomerBL>();
-            builder.Services.AddScoped<BL.Interface.IBaseBL<Customer>, CustomerBL>();
-
-            // Register SaleOrder DL & BL
-            builder.Services.AddScoped<DL.Interface.ISaleOrderRepository, SaleOrderRepository>();
-            builder.Services.AddScoped<DL.Interface.IBaseDL<SaleOrder>, SaleOrderRepository>();
-            builder.Services.AddScoped<BL.Interface.ISaleOrderBL, SaleOrderBL>();
-            builder.Services.AddScoped<BL.Interface.IBaseBL<SaleOrder>, SaleOrderBL>();
-
-            // Register SaleOrderDetail DL & BL
-            builder.Services.AddScoped<DL.Interface.ISaleOrderDetailRepository, SaleOrderDetailRepository>();
-            builder.Services.AddScoped<DL.Interface.IBaseDL<SaleOrderDetail>, SaleOrderDetailRepository>();
-            builder.Services.AddScoped<BL.Interface.ISaleOrderDetailBL, SaleOrderDetailBL>();
-            builder.Services.AddScoped<BL.Interface.IBaseBL<SaleOrderDetail>, SaleOrderDetailBL>();
-
             // Register Employee DL & BL
             builder.Services.AddScoped<DL.Interface.IEmployeesRepository, EmployeesRepository>();
             builder.Services.AddScoped<DL.Interface.IBaseDL<Employees>, EmployeesRepository>();
             builder.Services.AddScoped<BL.Interface.IEmployeesBL, EmployeesBL>();
             builder.Services.AddScoped<BL.Interface.IBaseBL<Employees>, EmployeesBL>();
 
+            // Register Candidates DL & BL
+            builder.Services.AddScoped<DL.Interface.ICandidatesRepository, CandidatesRepository>();
+            builder.Services.AddScoped<DL.Interface.IBaseDL<Candidates>, CandidatesRepository>();
+            builder.Services.AddScoped<BL.Interface.ICandidatesBL, CandidatesBL>();
+            builder.Services.AddScoped<BL.Interface.IBaseBL<Candidates>, CandidatesBL>();
 
+            // Register Region DL & BL
+            builder.Services.AddScoped<DL.Interface.IRegionRepository, RegionRepository>();
+            builder.Services.AddScoped<DL.Interface.IBaseDL<Region, int>, RegionRepository>();
+            builder.Services.AddScoped<BL.Interface.IRegionBL, RegionBL>();
+            builder.Services.AddScoped<BL.Interface.IBaseBL<Region, int>, RegionBL>();
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontend",
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:5173")
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();
+                    });
+            });
             Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
             var app = builder.Build();
@@ -62,6 +66,7 @@ namespace web_06
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("AllowFrontend");
 
             app.UseAuthorization();
 

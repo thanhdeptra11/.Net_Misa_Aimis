@@ -1,4 +1,6 @@
-﻿using Dapper;
+using Common.Extension;
+using Common.Model;
+using Dapper;
 using DL.Interface;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DL.Base
 {
-    public abstract class BaseDL<T> : IBaseDL<T> where T : class
+    public abstract class BaseDL<T, TId> : IBaseDL<T, TId> where T : class
     {
         protected readonly IDbConnectionFactory _connectionFactory;
         protected abstract string TableName { get; }
@@ -18,8 +20,11 @@ namespace DL.Base
         protected virtual string IdColumnName => "id";
         protected virtual string IdPropertyName => "Id";
 
+        // Mảng chứa các cột dùng để query LIKE khi có SearchTerm (cần overide ở class con)
+        protected virtual string[] SearchColumns => Array.Empty<string>();
 
-        // CACHE TĨNH CHO TỪNG KIỂU T (Chỉ chạy 1 lần duy nhất trong suốt vòng đời App)
+
+        // Cache tĩnh từng kiểu T
 
         private static readonly string _selectColumns;
         private static readonly string _insertColumns;
@@ -28,7 +33,7 @@ namespace DL.Base
 
         static BaseDL()
         {
-            // Lọc ra các property có thể đọc và KHÔNG có attribute [NotMapped]
+            // Lọc ra các property có thể đọc và không có attribute [NotMapped]
             _validProperties = typeof(T).GetProperties()
                 .Where(p => p.CanRead && p.GetCustomAttribute<NotMappedAttribute>() == null)
                 .ToArray();
@@ -57,14 +62,135 @@ namespace DL.Base
             _connectionFactory = connectionFactory;
         }
 
+
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             string query = $"SELECT {_selectColumns} FROM {TableName}";
             using var connection = _connectionFactory.CreateConnection();
             return await connection.QueryAsync<T>(query);
         }
+        /// <summary>
+        /// Build câu lệnh filter động kết hợp nhiều điều kiện
+        /// </summary>
+        protected string BuildFilterCondition(
+            List<FilterCondition> filters,
+            DynamicParameters parameters)
+        {
+            if (filters == null || !filters.Any())
+                return "";
 
-        public virtual async Task<T?> GetByIdAsync(Guid id)
+            var conditions = new List<string>();
+            int index = 0;
+
+            foreach (var filter in filters)
+            {
+                //// mapping property -> column trong DB
+                //var prop = _validProperties.FirstOrDefault(p =>
+                //    string.Equals(p.Name, filter.Property, StringComparison.OrdinalIgnoreCase));
+
+                //if (prop == null) continue;
+                //Convert value
+                var convertedValue = ExtensionUtility.ConvertValue(filter.Value, filter.DataType);
+                var columnName = filter.Property; // GetColumnNameStatic(prop);
+                var paramName = $"Param{index}";
+
+                switch (filter.Operator.ToLower())
+                {
+                    case "contains":
+                        conditions.Add($"{columnName} LIKE @{paramName}");
+                        parameters.Add(paramName, $"%{convertedValue}%");
+                        break;
+
+                    case "=":
+                        conditions.Add($"{columnName} = @{paramName}");
+                        parameters.Add(paramName, convertedValue);
+                        break;
+
+                    case ">":
+                    case ">=":
+                    case "<":
+                    case "<=":
+                        conditions.Add($"{columnName} {filter.Operator} @{paramName}");
+                        parameters.Add(paramName, convertedValue);
+                        break;
+
+                    default:
+                        throw new Exception($"Operator {filter.Operator} not supported");
+                }
+
+                index++;
+            }
+
+            return conditions.Any()
+                ? string.Join(" AND ", conditions)
+                : "";
+        }
+        public virtual async Task<PagingResponse<T>> GetPagingAsync(PagingRequest request)
+        {
+            return await GetPagingCustomAsync<T>(
+                request,
+                selectClause: _selectColumns,
+                fromAndJoinClause: $"FROM {TableName}"
+            );
+        }
+
+        /// <summary>
+        /// Hàm hỗ trợ phân trang cho các query phức tạp (có JOIN) và trả về DTO thay vì Entity gốc.
+        /// Giúp tái sử dụng lại logic phân trang, search, filter cho các repository con.
+        /// </summary>
+        protected async Task<PagingResponse<TDto>> GetPagingCustomAsync<TDto>(
+            PagingRequest request, 
+            string selectClause, 
+            string fromAndJoinClause,
+            string tableAlias = "",
+            string? orderByClause = null)
+        {
+            var searchCondition = "";
+            var parameters = new DynamicParameters();
+
+            // Dùng câu lệnh filter
+            var filterCondition = BuildFilterCondition(request.Filters, parameters);
+
+            if (!string.IsNullOrWhiteSpace(request.SearchTerm) && SearchColumns.Length > 0)
+            {
+                var prefix = string.IsNullOrEmpty(tableAlias) ? "" : $"{tableAlias}.";
+                var conditions = SearchColumns.Select(c => $"{prefix}{c} LIKE @SearchTerm");
+                searchCondition = " WHERE (" + string.Join(" OR ", conditions) + ")";
+                parameters.Add("SearchTerm", $"%{request.SearchTerm}%");
+            }
+
+            // Kết hợp điều kiện search và filter
+            if (!string.IsNullOrWhiteSpace(filterCondition))
+            {
+                if (!string.IsNullOrWhiteSpace(searchCondition)) {
+                    searchCondition += " AND " + filterCondition;
+                }
+                else
+                {
+                    searchCondition = " WHERE " + filterCondition;
+                }
+            }
+
+            var countQuery = $"SELECT COUNT(1) {fromAndJoinClause} {searchCondition}";
+            
+            parameters.Add("Limit", request.PageSize);
+            parameters.Add("Offset", (request.PageNumber - 1) * request.PageSize);
+            
+            var prefixId = string.IsNullOrEmpty(tableAlias) ? "" : $"{tableAlias}.";
+            var orderBy = string.IsNullOrWhiteSpace(orderByClause) ? $"{prefixId}{IdColumnName} DESC" : orderByClause;
+            var dataQuery = $"SELECT {selectClause} {fromAndJoinClause} {searchCondition} ORDER BY {orderBy} LIMIT @Limit OFFSET @Offset";
+
+            using var connection = _connectionFactory.CreateConnection();
+            
+            var totalRecords = await connection.ExecuteScalarAsync<long>(countQuery, parameters);
+            var data = await connection.QueryAsync<TDto>(dataQuery, parameters);
+            
+            var totalPages = totalRecords > 0 ? (int)Math.Ceiling(totalRecords / (double)request.PageSize) : 0;
+
+            return new PagingResponse<TDto>(totalRecords, totalPages, data);
+        }
+
+        public virtual async Task<T?> GetByIdAsync(TId id)
         {
             string query = $"SELECT {_selectColumns} FROM {TableName} WHERE {IdColumnName} = @Id";
             using var connection = _connectionFactory.CreateConnection();
@@ -90,21 +216,21 @@ namespace DL.Base
             return await connection.ExecuteAsync(query, entity);
         }
 
-        public virtual async Task<int> DeleteAsync(Guid id)
+        public virtual async Task<int> DeleteAsync(TId id)
         {
             string query = $"DELETE FROM {TableName} WHERE {IdColumnName} = @Id";
             using var connection = _connectionFactory.CreateConnection();
             return await connection.ExecuteAsync(query, new { Id = id });
         }
 
-        public virtual async Task<int> DeleteMultipleAsync(IEnumerable<Guid> ids)
+        public virtual async Task<int> DeleteMultipleAsync(IEnumerable<TId> ids)
         {
             string query = $"DELETE FROM {TableName} WHERE {IdColumnName} IN @Ids";
             using var connection = _connectionFactory.CreateConnection();
             return await connection.ExecuteAsync(query, new { Ids = ids });
         }
         // Kiểm tra trùng lặp giá trị của một property (cột) nào đó, có thể loại trừ một Id nhất định (dành cho update)
-        public async Task<bool> CheckDupblicate(string propertyName, object value, Guid? excludeId = null)
+        public async Task<bool> CheckDupblicate(string propertyName, object value, object? excludeId = null)
         {
             if (string.IsNullOrWhiteSpace(propertyName))
                 throw new ArgumentException("propertyName is required", nameof(propertyName));
@@ -120,14 +246,21 @@ namespace DL.Base
             if (value == null) return false;
             // Nếu value không null thì dùng = để so sánh
             var query = $"SELECT COUNT(1) FROM {TableName} WHERE {columnName} = @Value";
-            if (excludeId.HasValue)
+            if (excludeId != null)
             {
                 query += $" AND {IdColumnName} <> @ExcludeId";
-                var cnt = await connection.ExecuteScalarAsync<int>(query, new { Value = value, ExcludeId = excludeId.Value });
+                var cnt = await connection.ExecuteScalarAsync<int>(query, new { Value = value, ExcludeId = excludeId });
                 return cnt > 0;
             }
             var cntDefault = await connection.ExecuteScalarAsync<int>(query, new { Value = value });
             return cntDefault > 0;
+        }
+    }
+
+    public abstract class BaseDL<T> : BaseDL<T, Guid>, IBaseDL<T> where T : class
+    {
+        public BaseDL(IDbConnectionFactory connectionFactory) : base(connectionFactory)
+        {
         }
     }
 }

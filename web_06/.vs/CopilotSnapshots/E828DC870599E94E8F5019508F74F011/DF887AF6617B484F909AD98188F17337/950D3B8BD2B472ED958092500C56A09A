@@ -1,7 +1,0 @@
-﻿namespace Resources
-{
-    public static class Messages
-    {
-        public const string AddedSuccessfully = "Added successfully";
-    }
-}

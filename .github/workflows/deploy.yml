@@ -34,4 +34,7 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/misaaimis
             docker stop misaaimis || true
             docker rm misaaimis || true
-            docker run -d --name misaaimis -p 5000:8080 -e ConnectionStrings__Misa2Thang="${{ secrets.DB_CONNECTION_STRING }}" ${{ secrets.DOCKER_USERNAME }}/misaaimis
+            docker run -d --name misaaimis -p 5000:8080\
+             -e ASPNETCORE_ENVIRONMENT=Development \
+             -e ConnectionStrings__Misa2Thang="${{ secrets.DB_CONNECTION_STRING }}"\
+              ${{ secrets.DOCKER_USERNAME }}/misaaimis

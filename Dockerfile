@@ -30,3 +30,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "web_06.dll"]
+#retry deployv1

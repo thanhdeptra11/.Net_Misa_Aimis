@@ -1,6 +1,7 @@
-﻿using Common.Attributes;
+using Common.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -97,6 +98,42 @@ namespace Common.Extension
             }
 
             return value;
+        }
+
+        /// <summary>
+        /// Lấy ra Description của Enum
+        /// </summary>
+        public static string GetEnumDescription(Enum value)
+        {
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+            if (fi == null) return value.ToString();
+
+            DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            if (attributes != null && attributes.Length > 0)
+                return attributes[0].Description;
+            else
+                return value.ToString();
+        }
+
+        /// <summary>
+        /// Lấy danh sách giá trị, tên, và description của Enum
+        /// </summary>
+        public static List<object> GetEnumValues(Type enumType)
+        {
+            var result = new List<object>();
+            if (!enumType.IsEnum) return result;
+
+            foreach (var value in Enum.GetValues(enumType))
+            {
+                result.Add(new
+                {
+                    Value = (int)value,
+                    Name = value.ToString(),
+                    Description = GetEnumDescription((Enum)value)
+                });
+            }
+            return result;
         }
     }
 }

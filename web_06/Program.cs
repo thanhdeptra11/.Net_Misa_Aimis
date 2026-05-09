@@ -4,7 +4,7 @@ using Common.Model;
 using DL;
 using DL.Interface;
 using DL.Repository;
-using Model.Model;
+
 
 namespace web_06
 {
@@ -23,23 +23,31 @@ namespace web_06
 
             builder.Services.AddSingleton<IDbConnectionFactory, MySqlConnectionFactory>();
 
-            // Register Employee DL & BL
-            builder.Services.AddScoped<DL.Interface.IEmployeesRepository, EmployeesRepository>();
-            builder.Services.AddScoped<DL.Interface.IBaseDL<Employees>, EmployeesRepository>();
-            builder.Services.AddScoped<BL.Interface.IEmployeesBL, EmployeesBL>();
-            builder.Services.AddScoped<BL.Interface.IBaseBL<Employees>, EmployeesBL>();
 
-            // Register Candidates DL & BL
-            builder.Services.AddScoped<DL.Interface.ICandidatesRepository, CandidatesRepository>();
-            builder.Services.AddScoped<DL.Interface.IBaseDL<Candidates>, CandidatesRepository>();
-            builder.Services.AddScoped<BL.Interface.ICandidatesBL, CandidatesBL>();
-            builder.Services.AddScoped<BL.Interface.IBaseBL<Candidates>, CandidatesBL>();
 
-            // Register Region DL & BL
-            builder.Services.AddScoped<DL.Interface.IRegionRepository, RegionRepository>();
-            builder.Services.AddScoped<DL.Interface.IBaseDL<Region, int>, RegionRepository>();
-            builder.Services.AddScoped<BL.Interface.IRegionBL, RegionBL>();
-            builder.Services.AddScoped<BL.Interface.IBaseBL<Region, int>, RegionBL>();
+            // Register GridConfig DL & BL
+            builder.Services.AddScoped<DL.Interface.IGridConfigRepository, GridConfigRepository>();
+            builder.Services.AddScoped<DL.Interface.IBaseDL<GridConfig>, GridConfigRepository>();
+            builder.Services.AddScoped<BL.Interface.IGridConfigBL, GridConfigBL>();
+            builder.Services.AddScoped<BL.Interface.IBaseBL<GridConfig>, GridConfigBL>();
+
+            // Register Organization DL & BL
+            builder.Services.AddScoped<DL.Interface.IOrganizationRepository, OrganizationRepository>();
+            builder.Services.AddScoped<DL.Interface.IBaseDL<Organization>, OrganizationRepository>();
+            builder.Services.AddScoped<BL.Interface.IOrganizationBL, OrganizationBL>();
+            builder.Services.AddScoped<BL.Interface.IBaseBL<Organization>, OrganizationBL>();
+
+            // Register SalaryComposition DL & BL
+            builder.Services.AddScoped<DL.Interface.ISalaryCompositionRepository, SalaryCompositionRepository>();
+            builder.Services.AddScoped<DL.Interface.IBaseDL<SalaryComposition>, SalaryCompositionRepository>();
+            builder.Services.AddScoped<BL.Interface.ISalaryCompositionBL, SalaryCompositionBL>();
+            builder.Services.AddScoped<BL.Interface.IBaseBL<SalaryComposition>, SalaryCompositionBL>();
+
+            // Register SalaryCompositionSystem DL & BL
+            builder.Services.AddScoped<DL.Interface.ISalaryCompositionSystemRepository, SalaryCompositionSystemRepository>();
+            builder.Services.AddScoped<DL.Interface.IBaseDL<SalaryCompositionSystem>, SalaryCompositionSystemRepository>();
+            builder.Services.AddScoped<BL.Interface.ISalaryCompositionSystemBL, SalaryCompositionSystemBL>();
+            builder.Services.AddScoped<BL.Interface.IBaseBL<SalaryCompositionSystem>, SalaryCompositionSystemBL>();
 
             builder.Services.AddCors(options =>
             {

@@ -4,13 +4,13 @@ using System.Text.Json.Serialization;
 
 namespace Common.Model
 {
-    public abstract class BaseModel<TId>
+    public abstract class BaseModel
     {
         // Default [Column("id")], override ở child class nếu cần (ví dụ: customer_id, sale_order_id)
 
         [Column("id")]
         [JsonPropertyName("id")]
-        public virtual TId Id { get; set; } = default!;
+        public virtual Guid Id { get; set; }
 
         [Column("create_date")]
         [JsonPropertyName("createdDate")]
@@ -33,7 +33,5 @@ namespace Common.Model
         public Status State { get; set; } = Status.None;
     }
 
-    public abstract class BaseModel : BaseModel<Guid>
-    {
-    }
+
 }

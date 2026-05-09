@@ -1,15 +1,23 @@
 using BL.Interface;
 using Common.Model;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace web_06.Controllers
 {
+    [Route("api/v1/[controller]")]
     [ApiController]
-    public abstract class BaseController<T, TId> : ControllerBase where T : class
+    public abstract class BaseController<T, TCreateDto, TUpdateDto> : ControllerBase 
+        where T : class 
+        where TCreateDto : class
+        where TUpdateDto : class
     {
-        protected readonly IBaseBL<T, TId> _baseBL;
+        //T: tên của thực thể (Model) là T 
+        //TCreateDto: tên của DTO tạo là TCreateDto
+        //TUpdateDto: tên của DTO cập nhật là TUpdateDto
+        protected readonly IBaseBL<T> _baseBL;
 
-        public BaseController(IBaseBL<T, TId> baseBL)
+        public BaseController(IBaseBL<T> baseBL)
         {
             _baseBL = baseBL;
         }
@@ -29,7 +37,7 @@ namespace web_06.Controllers
         }
 
         [HttpGet("{id}")]
-        public virtual async Task<IActionResult> GetById(TId id)
+        public virtual async Task<IActionResult> GetById(Guid id)
         {
             var result = await _baseBL.GetByIdAsync(id);
             if (result == null)
@@ -38,21 +46,58 @@ namespace web_06.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> Add([FromBody] T entity)
+        public virtual async Task<IActionResult> Add([FromBody] TCreateDto dto)
         {
+            T entity;
+            
+            if (typeof(TCreateDto) == typeof(T))
+            {
+                entity = (T)(object)dto;
+            }
+            else
+            {
+                // Ép kiểu dto về Json
+                var json = System.Text.Json.JsonSerializer.Serialize(dto);
+                // Ép kiểu Json về T các giá trị không có gán bằng null
+                entity = System.Text.Json.JsonSerializer.Deserialize<T>(json,
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    })!;
+            }
+            
+            if (entity == null) return BadRequest();
+            
             var result = await _baseBL.AddAsync(entity);
             return Ok(new { message = Common.Resources.Messages.AddedSuccessfully, affectedRows = result });
         }
 
         [HttpPut]
-        public virtual async Task<IActionResult> Update([FromBody] T entity)
+        public virtual async Task<IActionResult> Update([FromBody] TUpdateDto dto)
         {
+            // Khởi tạo entity
+            T entity;
+
+            // Ép kiểu dto về T
+            if (typeof(TUpdateDto) == typeof(T))
+            {
+                // Dùng object để ép kiểu dto về T
+                entity = (T)(object)dto;
+            }
+            else
+            {
+                var json = System.Text.Json.JsonSerializer.Serialize(dto);
+                entity = System.Text.Json.JsonSerializer.Deserialize<T>(json);
+            }
+
+            if (entity == null) return BadRequest();
+
             var result = await _baseBL.UpdateAsync(entity);
             return Ok(new { message = Common.Resources.Messages.UpdatedSuccessfully, affectedRows = result });
         }
 
         [HttpDelete("{id}")]
-        public virtual async Task<IActionResult> Delete(TId id)
+        public virtual async Task<IActionResult> Delete(Guid id)
         {
             var result = await _baseBL.DeleteAsync(id);
             if (result == 0)
@@ -61,7 +106,7 @@ namespace web_06.Controllers
         }
 
         [HttpPost("delete-multiple")]
-        public virtual async Task<IActionResult> DeleteMultiple([FromBody] IEnumerable<TId> ids)
+        public virtual async Task<IActionResult> DeleteMultiple([FromBody] IEnumerable<Guid> ids)
         {
             var result = await _baseBL.DeleteMultipleAsync(ids);
             return Ok(new { message = Common.Resources.Messages.DeletedSuccessfully, affectedRows = result });
@@ -95,7 +140,9 @@ namespace web_06.Controllers
     }
 
     [Route("api/v1/[controller]")]
-    public abstract class BaseController<T> : BaseController<T, Guid> where T : class
+    [ApiController]
+    // Shorthand của BaseController<T, T, T>
+    public abstract class BaseController<T> : BaseController<T, T, T> where T : class
     {
         public BaseController(IBaseBL<T> baseBL) : base(baseBL)
         {

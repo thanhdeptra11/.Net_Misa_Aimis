@@ -11,7 +11,7 @@
  Target Server Version : 80031 (8.0.31)
  File Encoding         : 65001
 
- Date: 22/04/2026 14:14:54
+ Date: 09/05/2026 14:16:19
 */
 
 SET NAMES utf8mb4;
@@ -61,6 +61,95 @@ CREATE TABLE `employees`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for pa_grid_config
+-- ----------------------------
+DROP TABLE IF EXISTS `pa_grid_config`;
+CREATE TABLE `pa_grid_config`  (
+  `GridConfigId` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'Khóa chính',
+  `OrganizationId` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'ID Đơn vị (nếu config áp dụng chung cho đơn vị)',
+  `UserId` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'ID Người dùng (nếu config lưu theo từng user cụ thể)',
+  `GridId` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'Mã định danh của Grid (VD: SalaryCompositionList)',
+  `ColumnField` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'Tên trường dữ liệu (VD: CompositionCode, Property)',
+  `IsVisible` tinyint(1) NULL DEFAULT 1 COMMENT 'Cột có hiển thị hay không (1: Hiện, 0: Ẩn)',
+  `IsPinned` tinyint(1) NULL DEFAULT 0 COMMENT 'Cho phép ghim cột (1: Ghim, 0: Không)',
+  `PinPosition` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Vị trí ghim (left, right)',
+  `ColumnOrder` int NULL DEFAULT 0 COMMENT 'Thứ tự hiển thị của cột',
+  `ColumnWidth` int NULL DEFAULT NULL COMMENT 'Độ rộng của cột (px)',
+  `CreatedDate` datetime NULL DEFAULT CURRENT_TIMESTAMP,
+  `ModifiedDate` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`GridConfigId`) USING BTREE,
+  UNIQUE INDEX `idx_user_grid_col`(`UserId` ASC, `GridId` ASC, `ColumnField` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Bảng cấu hình hiển thị cột của Data Grid' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for pa_organization
+-- ----------------------------
+DROP TABLE IF EXISTS `pa_organization`;
+CREATE TABLE `pa_organization`  (
+  `OrganizationId` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'Khóa chính, ID Đơn vị/Công ty',
+  `ParentId` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'ID của đơn vị cha (NULL nếu là đơn vị cấp cao nhất)',
+  `OrganizationName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'Tên đơn vị (VD: Công ty Thí điểm AgentWork)',
+  `CreatedDate` datetime NULL DEFAULT CURRENT_TIMESTAMP,
+  `ModifiedDate` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`OrganizationId`) USING BTREE,
+  INDEX `idx_parent_id`(`ParentId` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Bảng danh sách đơn vị công tác' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for pa_salary_composition
+-- ----------------------------
+DROP TABLE IF EXISTS `pa_salary_composition`;
+CREATE TABLE `pa_salary_composition`  (
+  `CompositionId` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'Khóa chính, ID Thành phần lương',
+  `OrganizationId` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'ID Đơn vị áp dụng (FK)',
+  `SystemCompositionId` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'ID TPL Hệ thống (nếu được nhân bản từ hệ thống)',
+  `CompositionCode` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'Mã thành phần (VD: __HT_DS)',
+  `CompositionName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'Tên thành phần (VD: % HT DS)',
+  `CompositionType` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Loại thành phần (Lương, Khác, Doanh số, Thông tin nhân viên...)',
+  `Property` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Tính chất (Thu nhập, Khác...)',
+  `TaxableType` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Chịu thuế (Chịu thuế, -)',
+  `TaxDeductionType` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Giảm trừ khi tính thuế (Không, -)',
+  `Norm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Định mức',
+  `ValueType` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Kiểu giá trị (Tiền tệ, ...)',
+  `ValueExpression` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT 'Giá trị hoặc Công thức (VD: 1.000.000 hoặc =15%*THU_NHAP...)',
+  `Description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT 'Mô tả',
+  `ShowOnPayslip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Hiển thị trên phiếu lương (Chỉ hiển thị nếu giá trị khác 0, Có)',
+  `CreationSource` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Nguồn tạo (Tự thêm, Hệ thống...)',
+  `Status` tinyint(1) NULL DEFAULT 1 COMMENT 'Trạng thái (1: Đang theo dõi, 0: Ngừng theo dõi)',
+  `CreatedDate` datetime NULL DEFAULT CURRENT_TIMESTAMP,
+  `CreatedBy` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `ModifiedDate` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ModifiedBy` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`CompositionId`) USING BTREE,
+  INDEX `idx_org_id`(`OrganizationId` ASC) USING BTREE,
+  INDEX `idx_sys_comp_id`(`SystemCompositionId` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Bảng danh sách thành phần lương của đơn vị' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for pa_salary_composition_system
+-- ----------------------------
+DROP TABLE IF EXISTS `pa_salary_composition_system`;
+CREATE TABLE `pa_salary_composition_system`  (
+  `SystemCompositionId` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'Khóa chính, ID TPL Hệ thống',
+  `CompositionCode` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'Mã thành phần (VD: LCB, BHXH...)',
+  `CompositionName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'Tên thành phần',
+  `CompositionType` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Loại thành phần (Lương, Khác, Doanh số, Thông tin nhân viên...)',
+  `Property` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Tính chất (Thu nhập, Khác...)',
+  `TaxableType` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Chịu thuế (Chịu thuế, Không chịu thuế, -)',
+  `TaxDeductionType` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Giảm trừ khi tính thuế (Không, -)',
+  `Norm` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Định mức',
+  `ValueType` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Kiểu giá trị (Tiền tệ, Phần trăm...)',
+  `ValueExpression` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT 'Giá trị/Công thức tính (VD: =PHU_CAP_01*KHAU_TRU_BHXH)',
+  `Description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT 'Mô tả',
+  `ShowOnPayslip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Hiển thị trên phiếu lương (Chỉ hiển thị nếu giá trị khác 0, Có, Không)',
+  `Status` tinyint(1) NULL DEFAULT 1 COMMENT 'Trạng thái (1: Đang theo dõi, 0: Ngừng theo dõi)',
+  `CreatedDate` datetime NULL DEFAULT CURRENT_TIMESTAMP,
+  `ModifiedDate` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`SystemCompositionId`) USING BTREE,
+  UNIQUE INDEX `idx_system_comp_code`(`CompositionCode` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Bảng danh mục thành phần lương hệ thống' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for region2
 -- ----------------------------
 DROP TABLE IF EXISTS `region2`;
@@ -107,6 +196,12 @@ CREATE TABLE `systemkey`  (
 -- ----------------------------
 DROP VIEW IF EXISTS `candidateswithregion`;
 CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `candidateswithregion` AS select `c`.`candidate_id` AS `candidate_id`,`c`.`candidate_name` AS `candidate_name`,`c`.`candidate_dob` AS `candidate_dob`,`c`.`candidate_phone_number` AS `candidate_phone_number`,`c`.`candidate_email` AS `candidate_email`,`c`.`candidate_gender` AS `candidate_gender`,`country`.`RegionName` AS `country_name`,`province`.`RegionName` AS `province_name`,`ward`.`RegionName` AS `ward_name`,`c`.`candidate_address_detail` AS `candidate_address_detail` from (((`candidates` `c` left join `region2` `country` on((`country`.`RegionID` = `c`.`candidate_country`))) left join `region2` `province` on((`province`.`RegionID` = `c`.`candidate_province`))) left join `region2` `ward` on((`ward`.`RegionID` = `c`.`candidate_ward`)));
+
+-- ----------------------------
+-- View structure for view_salary_composition_after_join
+-- ----------------------------
+DROP VIEW IF EXISTS `view_salary_composition_after_join`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `view_salary_composition_after_join` AS select `sc`.`CompositionId` AS `CompositionId`,`sc`.`OrganizationId` AS `OrganizationId`,`sc`.`SystemCompositionId` AS `SystemCompositionId`,`sc`.`CompositionCode` AS `CompositionCode`,`sc`.`CompositionName` AS `CompositionName`,`sc`.`CompositionType` AS `CompositionType`,`sc`.`Property` AS `Property`,`sc`.`TaxableType` AS `TaxableType`,`sc`.`TaxDeductionType` AS `TaxDeductionType`,`sc`.`Norm` AS `Norm`,`sc`.`ValueType` AS `ValueType`,`sc`.`ValueExpression` AS `ValueExpression`,`sc`.`Description` AS `Description`,`sc`.`ShowOnPayslip` AS `ShowOnPayslip`,`sc`.`CreationSource` AS `CreationSource`,`sc`.`Status` AS `Status`,`sc`.`CreatedDate` AS `CreatedDate`,`sc`.`CreatedBy` AS `CreatedBy`,`sc`.`ModifiedDate` AS `ModifiedDate`,`sc`.`ModifiedBy` AS `ModifiedBy`,`o`.`OrganizationName` AS `OrganizationName` from (`pa_salary_composition` `sc` left join `pa_organization` `o` on((`sc`.`OrganizationId` = `o`.`OrganizationId`)));
 
 -- ----------------------------
 -- Procedure structure for usp_logerror_InsertError

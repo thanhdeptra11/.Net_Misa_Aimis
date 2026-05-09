@@ -7,11 +7,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BL.Base
 {
-    public abstract class BaseBL<T, TId> : Interface.IBaseBL<T, TId> where T : BaseModel<TId>
+    public abstract class BaseBL<T> : Interface.IBaseBL<T> where T : BaseModel
     {
-        protected IBaseDL<T, TId> _baseDL;
+        protected IBaseDL<T> _baseDL;
 
-        public BaseBL(IBaseDL<T, TId> baseDL)
+        public BaseBL(IBaseDL<T> baseDL)
         {
             _baseDL = baseDL;
         }
@@ -86,21 +86,21 @@ namespace BL.Base
             await Task.CompletedTask;
         }
 
-        public virtual async Task<T?> GetByIdAsync(TId id)
+        public virtual async Task<T?> GetByIdAsync(Guid id)
         {
             return await _baseDL.GetByIdAsync(id);
         }
 
         public virtual async Task<int> AddAsync(T entity)
         {
-            if (EqualityComparer<TId>.Default.Equals(entity.Id, default))
+            if (entity.Id == Guid.Empty)
             {
-                if (typeof(TId) == typeof(Guid))
-                {
-                    entity.Id = (TId)(object)Guid.NewGuid();
-                }
+                entity.Id = Guid.NewGuid();
             }
             entity.CreatedDate = DateTime.UtcNow;
+            entity.CreatedBy = "System";
+            entity.ModifiedDate = DateTime.UtcNow;
+            entity.ModifiedBy = "System";
 
             var isValid = await ValidateBusinessRulesAsync(entity, isUpdate: false);
             if (!isValid) throw new Exception("Entity does not satisfy business rules.");
@@ -110,18 +110,19 @@ namespace BL.Base
         public virtual async Task<int> UpdateAsync(T entity)
         {
             entity.ModifiedDate = DateTime.UtcNow;
+            entity.ModifiedBy = "System";
 
             var isValid = await ValidateBusinessRulesAsync(entity, isUpdate: true);
             if (!isValid) throw new Exception("Entity does not satisfy business rules.");
             return await _baseDL.UpdateAsync(entity);
         }
 
-        public virtual async Task<int> DeleteAsync(TId id)
+        public virtual async Task<int> DeleteAsync(Guid id)
         {
             return await _baseDL.DeleteAsync(id);
         }
 
-        public virtual async Task<int> DeleteMultipleAsync(IEnumerable<TId> ids)
+        public virtual async Task<int> DeleteMultipleAsync(IEnumerable<Guid> ids)
         {
             return await _baseDL.DeleteMultipleAsync(ids);
         }
@@ -162,7 +163,7 @@ namespace BL.Base
                             }
                         }
 
-                        var isDup = await _baseDL.CheckDupblicate(property.Name, value, excludeId);
+                        var isDup = await _baseDL.CheckDuplicate(property.Name, value, excludeId);
                         if (isDup)
                         {
                             var message = uniqueAttribute.Message ?? string.Format(Common.Resources.Messages.AlreadyExists, property.Name);
@@ -173,13 +174,6 @@ namespace BL.Base
             }
             // Mặc định trả về true, các BL cụ thể có thể override để thêm logic validate riêng
             return await Task.FromResult(true);
-        }
-    }
-
-    public abstract class BaseBL<T> : BaseBL<T, Guid>, Interface.IBaseBL<T> where T : BaseModel
-    {
-        public BaseBL(IBaseDL<T> baseDL) : base(baseDL)
-        {
         }
     }
 }

@@ -97,10 +97,19 @@ namespace BL.Base
             {
                 entity.Id = Guid.NewGuid();
             }
-            entity.CreatedDate = DateTime.UtcNow;
-            entity.CreatedBy = "System";
-            entity.ModifiedDate = DateTime.UtcNow;
-            entity.ModifiedBy = "System";
+
+            var type = typeof(T);
+            var createdDateProp = type.GetProperty("CreatedDate");
+            if (createdDateProp != null && createdDateProp.CanWrite) createdDateProp.SetValue(entity, DateTime.UtcNow);
+
+            var createdByProp = type.GetProperty("CreatedBy");
+            if (createdByProp != null && createdByProp.CanWrite) createdByProp.SetValue(entity, "System");
+
+            var modifiedDateProp = type.GetProperty("ModifiedDate");
+            if (modifiedDateProp != null && modifiedDateProp.CanWrite) modifiedDateProp.SetValue(entity, DateTime.UtcNow);
+
+            var modifiedByProp = type.GetProperty("ModifiedBy");
+            if (modifiedByProp != null && modifiedByProp.CanWrite) modifiedByProp.SetValue(entity, "System");
 
             var isValid = await ValidateBusinessRulesAsync(entity, isUpdate: false);
             if (!isValid) throw new Exception("Entity does not satisfy business rules.");
@@ -109,8 +118,12 @@ namespace BL.Base
 
         public virtual async Task<int> UpdateAsync(T entity)
         {
-            entity.ModifiedDate = DateTime.UtcNow;
-            entity.ModifiedBy = "System";
+            var type = typeof(T);
+            var modifiedDateProp = type.GetProperty("ModifiedDate");
+            if (modifiedDateProp != null && modifiedDateProp.CanWrite) modifiedDateProp.SetValue(entity, DateTime.UtcNow);
+
+            var modifiedByProp = type.GetProperty("ModifiedBy");
+            if (modifiedByProp != null && modifiedByProp.CanWrite) modifiedByProp.SetValue(entity, "System");
 
             var isValid = await ValidateBusinessRulesAsync(entity, isUpdate: true);
             if (!isValid) throw new Exception("Entity does not satisfy business rules.");

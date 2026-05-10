@@ -76,18 +76,18 @@ namespace Common.Model
 
         [Column("CreatedDate")]
         [JsonPropertyName("createdDate")]
-        public override DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [Column("CreatedBy")]
         [JsonPropertyName("createdBy")]
-        public override string? CreatedBy { get; set; }
+        public string? CreatedBy { get; set; }
 
         [Column("ModifiedDate")]
         [JsonPropertyName("modifiedDate")]
-        public override DateTime? ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
 
         [Column("ModifiedBy")]
         [JsonPropertyName("modifiedBy")]
-        public override string? ModifiedBy { get; set; }
+        public string? ModifiedBy { get; set; }
     }
 }

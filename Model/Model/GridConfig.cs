@@ -47,10 +47,10 @@ namespace Common.Model
 
         [Column("CreatedDate")]
         [JsonPropertyName("createdDate")]
-        public override DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [Column("ModifiedDate")]
         [JsonPropertyName("modifiedDate")]
-        public override DateTime? ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
     }
 }

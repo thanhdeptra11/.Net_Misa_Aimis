@@ -12,7 +12,21 @@ namespace Common.Model
         [JsonPropertyName("id")]
         public virtual Guid Id { get; set; }
 
+        [Column("created_by")]
+        [JsonPropertyName("CreatedBy")]
+        public string? CreatedBy { get; set; }
 
+        [Column("created_date")]
+        [JsonPropertyName("CreatedDate")]
+        public DateTime? CreatedDate { get; set; }
+
+        [Column("modified_by")]
+        [JsonPropertyName("ModifiedBy")]
+        public string? ModifiedBy { get; set; }
+
+        [Column("modified_date")]
+        [JsonPropertyName("ModifiedDate")]
+        public DateTime? ModifiedDate { get; set; }
 
         [NotMapped]
         [JsonPropertyName("state")]

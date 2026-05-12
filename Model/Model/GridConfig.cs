@@ -6,50 +6,50 @@ namespace Common.Model
 {
     public class GridConfig : BaseModel
     {
-        [Column("GridConfigId")]
+        [Column("grid_config_id")]
         public override Guid Id { get; set; }
 
-        [Column("OrganizationId")]
+        [Column("orgnization_id")]
         [JsonPropertyName("organizationId")]
         public Guid? OrganizationId { get; set; }
 
-        [Column("UserId")]
+        [Column("user_id")]
         [JsonPropertyName("userId")]
         public Guid? UserId { get; set; }
 
-        [Column("GridId")]
+        [Column("grid_id")]
         [JsonPropertyName("gridId")]
         public string GridId { get; set; } = string.Empty;
 
-        [Column("ColumnField")]
+        [Column("column_field")]
         [JsonPropertyName("columnField")]
         public string ColumnField { get; set; } = string.Empty;
 
-        [Column("IsVisible")]
+        [Column("is_visible")]
         [JsonPropertyName("isVisible")]
         public bool IsVisible { get; set; } = true;
 
-        [Column("IsPinned")]
+        [Column("is_pinned")]
         [JsonPropertyName("isPinned")]
         public bool IsPinned { get; set; } = false;
 
-        [Column("PinPosition")]
+        [Column("pin_postion")]
         [JsonPropertyName("pinPosition")]
         public string? PinPosition { get; set; }
 
-        [Column("ColumnOrder")]
+        [Column("column_order")]
         [JsonPropertyName("columnOrder")]
         public int ColumnOrder { get; set; }
 
-        [Column("ColumnWidth")]
+        [Column("column_width")]
         [JsonPropertyName("columnWidth")]
         public int? ColumnWidth { get; set; }
 
-        [Column("CreatedDate")]
+        [Column("created_date")]
         [JsonPropertyName("createdDate")]
         public DateTime CreatedDate { get; set; }
 
-        [Column("ModifiedDate")]
+        [Column("modified_date")]
         [JsonPropertyName("modifiedDate")]
         public DateTime? ModifiedDate { get; set; }
     }

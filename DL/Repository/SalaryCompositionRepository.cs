@@ -11,35 +11,35 @@ namespace DL.Repository
     public class SalaryCompositionRepository : BaseDL<SalaryComposition>, ISalaryCompositionRepository
     {
         protected override string TableName => "pa_salary_composition";
-        protected override string IdColumnName => "CompositionId";
-        protected override string[] SearchColumns => new string[] { "CompositionCode", "CompositionName" };
+        protected override string IdColumnName => "composition_id";
+        protected override string[] SearchColumns => new string[] { "composition_code", "composition_name" };
 
         public SalaryCompositionRepository(IDbConnectionFactory connectionFactory) : base(connectionFactory)
         {
         }
 
         private const string _selectWithMapColumns = @"
-            sc.CompositionId AS Id,
-            sc.OrganizationId AS OrganizationId,
-            sc.SystemCompositionId AS SystemCompositionId,
-            sc.CompositionCode AS CompositionCode,
-            sc.CompositionName AS CompositionName,
-            sc.CompositionType AS CompositionType,
-            sc.Property AS Property,
-            sc.TaxableType AS TaxableType,
-            sc.TaxDeductionType AS TaxDeductionType,
-            sc.Norm AS Norm,
-            sc.ValueType AS ValueType,
-            sc.ValueExpression AS ValueExpression,
-            sc.Description AS Description,
-            sc.ShowOnPayslip AS ShowOnPayslip,
-            sc.CreationSource AS CreationSource,
-            sc.Status AS Status,
-            sc.CreatedDate AS CreatedDate,
-            sc.CreatedBy AS CreatedBy,
-            sc.ModifiedDate AS ModifiedDate,
-            sc.ModifiedBy AS ModifiedBy,
-            sc.OrganizationName AS OrganizationName";
+            sc.composition_id AS Id,
+            sc.orgnization_id AS OrganizationId,
+            sc.system_composition_id AS SystemCompositionId,
+            sc.composition_code AS CompositionCode,
+            sc.composition_name AS CompositionName,
+            sc.composition_type AS CompositionType,
+            sc.property AS Property,
+            sc.taxable_type AS TaxableType,
+            sc.tax_deduction_type AS TaxDeductionType,
+            sc.norm AS Norm,
+            sc.value_type AS ValueType,
+            sc.value_expression AS ValueExpression,
+            sc.description AS Description,
+            sc.show_on_payslip AS ShowOnPayslip,
+            sc.creation_source AS CreationSource,
+            sc.status AS Status,
+            sc.created_date AS CreatedDate,
+            sc.created_by AS CreatedBy,
+            sc.modified_date AS ModifiedDate,
+            sc.modified_by AS ModifiedBy,
+            sc.orgnization_name AS OrganizationName";
 
         private const string _baseJoinSql = "FROM view_salary_composition_after_join sc";
 
@@ -50,7 +50,7 @@ namespace DL.Repository
                 selectClause: _selectWithMapColumns,
                 fromAndJoinClause: _baseJoinSql,
                 tableAlias: "sc",
-                orderByClause: "sc.CreatedDate DESC"
+                orderByClause: "sc.created_date DESC"
             );
         }
 

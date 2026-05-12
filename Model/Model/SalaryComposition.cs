@@ -8,85 +8,85 @@ namespace Common.Model
 {
     public class SalaryComposition : BaseModel
     {
-        [Column("CompositionId")]
+        [Column("composition_id")]
         public override Guid Id { get; set; }
 
-        [Column("OrganizationId")]
+        [Column("orgnization_id")]
         [JsonPropertyName("organizationId")]
         public Guid OrganizationId { get; set; }
 
-        [Column("SystemCompositionId")]
+        [Column("system_composition_id")]
         [JsonPropertyName("systemCompositionId")]
         public Guid? SystemCompositionId { get; set; }
 
-        [Column("CompositionCode")]
+        [Column("composition_code")]
         [JsonPropertyName("compositionCode")]
         [Unique]
         [Required]
         public string CompositionCode { get; set; }
 
-        [Column("CompositionName")]
+        [Column("composition_name")]
         [JsonPropertyName("compositionName")]
         [Required]
         public string CompositionName { get; set; }
 
-        [Column("CompositionType")]
+        [Column("composition_type")]
         [JsonPropertyName("compositionType")]
         public string? CompositionType { get; set; }
 
-        [Column("Property")]
+        [Column("property")]
         [JsonPropertyName("property")]
         public string? Property { get; set; }
 
-        [Column("TaxableType")]
+        [Column("taxable_type")]
         [JsonPropertyName("taxableType")]
         public string? TaxableType { get; set; }
 
-        [Column("TaxDeductionType")]
+        [Column("tax_deduction_type")]
         [JsonPropertyName("taxDeductionType")]
         public string? TaxDeductionType { get; set; }
 
-        [Column("Norm")]
+        [Column("norm")]
         [JsonPropertyName("norm")]
         public string? Norm { get; set; }
 
-        [Column("ValueType")]
+        [Column("value_type")]
         [JsonPropertyName("valueType")]
         public string? ValueType { get; set; }
 
-        [Column("ValueExpression")]
+        [Column("value_expression")]
         [JsonPropertyName("valueExpression")]
         public string? ValueExpression { get; set; }
 
-        [Column("Description")]
+        [Column("description")]
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
-        [Column("ShowOnPayslip")]
+        [Column("show_on_payslip")]
         [JsonPropertyName("showOnPayslip")]
         public string? ShowOnPayslip { get; set; }
 
-        [Column("CreationSource")]
+        [Column("creation_source")]
         [JsonPropertyName("creationSource")]
         public string? CreationSource { get; set; }
 
-        [Column("Status")]
+        [Column("status")]
         [JsonPropertyName("status")]
         public bool Status { get; set; } = true;
 
-        [Column("CreatedDate")]
+        [Column("created_date")]
         [JsonPropertyName("createdDate")]
         public DateTime CreatedDate { get; set; }
 
-        [Column("CreatedBy")]
+        [Column("created_by")]
         [JsonPropertyName("createdBy")]
         public string? CreatedBy { get; set; }
 
-        [Column("ModifiedDate")]
+        [Column("modified_date")]
         [JsonPropertyName("modifiedDate")]
         public DateTime? ModifiedDate { get; set; }
 
-        [Column("ModifiedBy")]
+        [Column("modified_by")]
         [JsonPropertyName("modifiedBy")]
         public string? ModifiedBy { get; set; }
     }

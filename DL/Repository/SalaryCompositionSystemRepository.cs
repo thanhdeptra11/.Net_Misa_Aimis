@@ -7,8 +7,8 @@ namespace DL.Repository
     public class SalaryCompositionSystemRepository : BaseDL<SalaryCompositionSystem>, ISalaryCompositionSystemRepository
     {
         protected override string TableName => "pa_salary_composition_system";
-        protected override string IdColumnName => "SystemCompositionId";
-        protected override string[] SearchColumns => new string[] { "CompositionCode", "CompositionName" };
+        protected override string IdColumnName => "system_composition_id";
+        protected override string[] SearchColumns => new string[] { "composition_code", "composition_name" };
 
         public SalaryCompositionSystemRepository(IDbConnectionFactory connectionFactory) : base(connectionFactory)
         {

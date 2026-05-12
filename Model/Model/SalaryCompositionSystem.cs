@@ -6,62 +6,62 @@ namespace Common.Model
 {
     public class SalaryCompositionSystem : BaseModel
     {
-        [Column("SystemCompositionId")]
+        [Column("system_composition_id")]
         public override Guid Id { get; set; }
 
-        [Column("CompositionCode")]
+        [Column("composition_code")]
         [JsonPropertyName("compositionCode")]
         public string CompositionCode { get; set; } = string.Empty;
 
-        [Column("CompositionName")]
+        [Column("composition_name")]
         [JsonPropertyName("compositionName")]
         public string CompositionName { get; set; } = string.Empty;
 
-        [Column("CompositionType")]
+        [Column("composition_type")]
         [JsonPropertyName("compositionType")]
         public string? CompositionType { get; set; }
 
-        [Column("Property")]
+        [Column("property")]
         [JsonPropertyName("property")]
         public string? Property { get; set; }
 
-        [Column("TaxableType")]
+        [Column("taxable_type")]
         [JsonPropertyName("taxableType")]
         public string? TaxableType { get; set; }
 
-        [Column("TaxDeductionType")]
+        [Column("tax_deduction_type")]
         [JsonPropertyName("taxDeductionType")]
         public string? TaxDeductionType { get; set; }
 
-        [Column("Norm")]
+        [Column("norm")]
         [JsonPropertyName("norm")]
         public string? Norm { get; set; }
 
-        [Column("ValueType")]
+        [Column("value_type")]
         [JsonPropertyName("valueType")]
         public string? ValueType { get; set; }
 
-        [Column("ValueExpression")]
+        [Column("value_expression")]
         [JsonPropertyName("valueExpression")]
         public string? ValueExpression { get; set; }
 
-        [Column("Description")]
+        [Column("description")]
         [JsonPropertyName("description")]
         public string? Description { get; set; }
 
-        [Column("ShowOnPayslip")]
+        [Column("show_on_payslip")]
         [JsonPropertyName("showOnPayslip")]
         public string? ShowOnPayslip { get; set; }
 
-        [Column("Status")]
+        [Column("status")]
         [JsonPropertyName("status")]
         public bool Status { get; set; } = true;
 
-        [Column("CreatedDate")]
+        [Column("created_date")]
         [JsonPropertyName("createdDate")]
         public DateTime CreatedDate { get; set; }
 
-        [Column("ModifiedDate")]
+        [Column("modified_date")]
         [JsonPropertyName("modifiedDate")]
         public DateTime? ModifiedDate { get; set; }
     }

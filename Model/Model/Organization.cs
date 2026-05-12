@@ -6,22 +6,22 @@ namespace Common.Model
 {
     public class Organization : BaseModel
     {
-        [Column("OrganizationId")]
+        [Column("orgnization_id")]
         public override Guid Id { get; set; }
 
-        [Column("ParentId")]
+        [Column("parent_id")]
         [JsonPropertyName("parentId")]
         public Guid? ParentId { get; set; }
 
-        [Column("OrganizationName")]
+        [Column("orgnization_name")]
         [JsonPropertyName("organizationName")]
         public string OrganizationName { get; set; } = string.Empty;
 
-        [Column("CreatedDate")]
+        [Column("created_date")]
         [JsonPropertyName("createdDate")]
         public DateTime CreatedDate { get; set; }
 
-        [Column("ModifiedDate")]
+        [Column("modified_date")]
         [JsonPropertyName("modifiedDate")]
         public DateTime? ModifiedDate { get; set; }
     }

@@ -67,7 +67,12 @@ namespace DL.Base
         {
             string query = $"SELECT {_selectColumns} FROM {TableName}";
             using var connection = _connectionFactory.CreateConnection();
-            return await connection.QueryAsync<T>(query);
+            var result = (await connection.QueryAsync<T>(query)).ToList();
+
+            // Tự động điền {PropertyName}Description cho các trường enum có [EnumType]
+            EnumDescriptionHelper.EnrichAll(result);
+
+            return result;
         }
         /// <summary>
         /// Build câu lệnh filter động kết hợp nhiều điều kiện
@@ -143,7 +148,7 @@ namespace DL.Base
             string selectClause, 
             string fromAndJoinClause,
             string tableAlias = "",
-            string? orderByClause = null)
+            string? orderByClause = null) where TDto : class
         {
             var searchCondition = "";
             var parameters = new DynamicParameters();
@@ -183,8 +188,11 @@ namespace DL.Base
             using var connection = _connectionFactory.CreateConnection();
             
             var totalRecords = await connection.ExecuteScalarAsync<long>(countQuery, parameters);
-            var data = await connection.QueryAsync<TDto>(dataQuery, parameters);
-            
+            var data = (await connection.QueryAsync<TDto>(dataQuery, parameters)).ToList();
+
+            // Tự động điền {PropertyName}Description cho các trường enum có [EnumType]
+            EnumDescriptionHelper.EnrichAll(data);
+
             var totalPages = totalRecords > 0 ? (int)Math.Ceiling(totalRecords / (double)request.PageSize) : 0;
 
             return new PagingResponse<TDto>(totalRecords, totalPages, data);

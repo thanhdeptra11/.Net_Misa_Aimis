@@ -1,4 +1,5 @@
 using Common.Attributes;
+using Common.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -32,14 +33,17 @@ namespace Common.Model
 
         [Column("composition_type")]
         [JsonPropertyName("compositionType")]
+        [EnumType(typeof(CompositionType))]
         public int? CompositionType { get; set; }
 
         [Column("property")]
         [JsonPropertyName("property")]
+        [EnumType(typeof(CompositionProperty))]
         public int? Property { get; set; }
 
         [Column("taxable_type")]
         [JsonPropertyName("taxableType")]
+        [EnumType(typeof(TaxAppliedType))]
         public int? TaxableType { get; set; }
 
         [Column("tax_deduction_type")]
@@ -52,6 +56,7 @@ namespace Common.Model
 
         [Column("value_type")]
         [JsonPropertyName("valueType")]
+        [EnumType(typeof(MiValueType))]
         public int? ValueType { get; set; }
 
         [Column("value_expression")]
@@ -64,6 +69,7 @@ namespace Common.Model
 
         [Column("show_on_payslip")]
         [JsonPropertyName("showOnPayslip")]
+        [EnumType(typeof(DisplayPayrollType))]
         public int? ShowOnPayslip { get; set; }
 
         [Column("creation_source")]
@@ -73,5 +79,25 @@ namespace Common.Model
         [Column("status")]
         [JsonPropertyName("status")]
         public bool Status { get; set; } = true;
+
+        [NotMapped]
+        [JsonPropertyName("compositionTypeDescription")]
+        public string? CompositionTypeDescription { get; set; }
+
+        [NotMapped]
+        [JsonPropertyName("propertyDescription")]
+        public string? PropertyDescription { get; set; }
+
+        [NotMapped]
+        [JsonPropertyName("taxableTypeDescription")]
+        public string? TaxableTypeDescription { get; set; }
+
+        [NotMapped]
+        [JsonPropertyName("valueTypeDescription")]
+        public string? ValueTypeDescription { get; set; }
+
+        [NotMapped]
+        [JsonPropertyName("showOnPayslipDescription")]
+        public string? ShowOnPayslipDescription { get; set; }
     }
 }

@@ -136,41 +136,6 @@ namespace Common.Extension
             return result;
         }
 
-        /// <summary>
-        /// Lấy danh sách các biến constant của một Class dựa vào tên
-        /// </summary>
-        public static List<object> GetConstantValues(string className)
-        {
-            // Lấy tất cả các assembly -> lấy toàn bộ type -> chỉ giữ type class và tìm kiếm khớp với tên
-            var constantType = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(x => x.GetTypes())
-                .FirstOrDefault(t => t.IsClass && t.Name.Equals(className, StringComparison.OrdinalIgnoreCase));
-
-            if (constantType == null)
-            {
-                throw new Exception($"Class {className} not found.");
-            }
-
-            return GetConstantValues(constantType);
-        }
-
-        /// <summary>
-        /// Lấy danh sách các biến constant của một Class
-        /// </summary>
-        public static List<object> GetConstantValues(Type constantType)
-        {
-            var result = new List<object>();
-            if (constantType == null || !constantType.IsClass) return result;
-            //Lấy tất cả các fields ra -> lấy ra các kiểu của field -> chỉ giữ lại constant
-            var constants = constantType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy)
-                .Where(fi => fi.IsLiteral && !fi.IsInitOnly)
-                .Select(fi => new
-                {
-                    Name = fi.Name,
-                    Value = fi.GetRawConstantValue()
-                }).ToList<object>();
-
-            return constants;
-        }
+        
     }
 }

@@ -44,13 +44,5 @@ namespace Common.Model
         [Column("column_width")]
         [JsonPropertyName("columnWidth")]
         public int? ColumnWidth { get; set; }
-
-        [Column("created_date")]
-        [JsonPropertyName("createdDate")]
-        public DateTime CreatedDate { get; set; }
-
-        [Column("modified_date")]
-        [JsonPropertyName("modifiedDate")]
-        public DateTime? ModifiedDate { get; set; }
     }
 }

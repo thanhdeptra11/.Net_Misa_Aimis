@@ -57,12 +57,5 @@ namespace Common.Model
         [JsonPropertyName("status")]
         public bool Status { get; set; } = true;
 
-        [Column("created_date")]
-        [JsonPropertyName("createdDate")]
-        public DateTime CreatedDate { get; set; }
-
-        [Column("modified_date")]
-        [JsonPropertyName("modifiedDate")]
-        public DateTime? ModifiedDate { get; set; }
     }
 }

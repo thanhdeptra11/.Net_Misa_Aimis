@@ -73,21 +73,5 @@ namespace Common.Model
         [Column("status")]
         [JsonPropertyName("status")]
         public bool Status { get; set; } = true;
-
-        [Column("created_date")]
-        [JsonPropertyName("createdDate")]
-        public DateTime CreatedDate { get; set; }
-
-        [Column("created_by")]
-        [JsonPropertyName("createdBy")]
-        public string? CreatedBy { get; set; }
-
-        [Column("modified_date")]
-        [JsonPropertyName("modifiedDate")]
-        public DateTime? ModifiedDate { get; set; }
-
-        [Column("modified_by")]
-        [JsonPropertyName("modifiedBy")]
-        public string? ModifiedBy { get; set; }
     }
 }

@@ -16,13 +16,5 @@ namespace Common.Model
         [Column("orgnization_name")]
         [JsonPropertyName("organizationName")]
         public string OrganizationName { get; set; } = string.Empty;
-
-        [Column("created_date")]
-        [JsonPropertyName("createdDate")]
-        public DateTime CreatedDate { get; set; }
-
-        [Column("modified_date")]
-        [JsonPropertyName("modifiedDate")]
-        public DateTime? ModifiedDate { get; set; }
     }
 }

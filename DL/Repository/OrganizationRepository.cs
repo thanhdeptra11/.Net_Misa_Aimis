@@ -8,7 +8,7 @@ namespace DL.Repository
     {
         protected override string TableName => "pa_organization";
         protected override string IdColumnName => "organization_id";
-        protected override string[] SearchColumns => new string[] { "orgnization_name" };
+        protected override string[] SearchColumns => new string[] { "organization_name" };
 
         public OrganizationRepository(IDbConnectionFactory connectionFactory) : base(connectionFactory)
         {

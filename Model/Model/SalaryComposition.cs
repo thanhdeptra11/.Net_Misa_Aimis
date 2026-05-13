@@ -11,7 +11,7 @@ namespace Common.Model
         [Column("composition_id")]
         public override Guid Id { get; set; }
 
-        [Column("orgnization_id")]
+        [Column("organization_id")]
         [JsonPropertyName("organizationId")]
         public Guid OrganizationId { get; set; }
 

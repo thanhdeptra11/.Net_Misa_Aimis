@@ -20,7 +20,7 @@ namespace DL.Repository
 
         private const string _selectWithMapColumns = @"
             sc.composition_id AS Id,
-            sc.orgnization_id AS OrganizationId,
+            sc.organization_id AS OrganizationId,
             sc.system_composition_id AS SystemCompositionId,
             sc.composition_code AS CompositionCode,
             sc.composition_name AS CompositionName,
@@ -39,7 +39,7 @@ namespace DL.Repository
             sc.created_by AS CreatedBy,
             sc.modified_date AS ModifiedDate,
             sc.modified_by AS ModifiedBy,
-            sc.orgnization_name AS OrganizationName";
+            sc.organization_name AS OrganizationName";
 
         private const string _baseJoinSql = "FROM view_salary_composition_after_join sc";
 

@@ -13,19 +13,19 @@ namespace Common.Model
         public virtual Guid Id { get; set; }
 
         [Column("created_by")]
-        [JsonPropertyName("CreatedBy")]
+        [JsonPropertyName("createdBy")]
         public string? CreatedBy { get; set; }
 
         [Column("created_date")]
-        [JsonPropertyName("CreatedDate")]
+        [JsonPropertyName("createdDate")]
         public DateTime? CreatedDate { get; set; }
 
         [Column("modified_by")]
-        [JsonPropertyName("ModifiedBy")]
+        [JsonPropertyName("modifiedBy")]
         public string? ModifiedBy { get; set; }
 
         [Column("modified_date")]
-        [JsonPropertyName("ModifiedDate")]
+        [JsonPropertyName("modifiedDate")]
         public DateTime? ModifiedDate { get; set; }
 
         [NotMapped]

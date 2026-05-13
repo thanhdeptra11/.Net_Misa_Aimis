@@ -32,15 +32,15 @@ namespace Common.Model
 
         [Column("composition_type")]
         [JsonPropertyName("compositionType")]
-        public string? CompositionType { get; set; }
+        public int? CompositionType { get; set; }
 
         [Column("property")]
         [JsonPropertyName("property")]
-        public string? Property { get; set; }
+        public int? Property { get; set; }
 
         [Column("taxable_type")]
         [JsonPropertyName("taxableType")]
-        public string? TaxableType { get; set; }
+        public int? TaxableType { get; set; }
 
         [Column("tax_deduction_type")]
         [JsonPropertyName("taxDeductionType")]
@@ -52,7 +52,7 @@ namespace Common.Model
 
         [Column("value_type")]
         [JsonPropertyName("valueType")]
-        public string? ValueType { get; set; }
+        public int? ValueType { get; set; }
 
         [Column("value_expression")]
         [JsonPropertyName("valueExpression")]
@@ -64,7 +64,7 @@ namespace Common.Model
 
         [Column("show_on_payslip")]
         [JsonPropertyName("showOnPayslip")]
-        public string? ShowOnPayslip { get; set; }
+        public int? ShowOnPayslip { get; set; }
 
         [Column("creation_source")]
         [JsonPropertyName("creationSource")]

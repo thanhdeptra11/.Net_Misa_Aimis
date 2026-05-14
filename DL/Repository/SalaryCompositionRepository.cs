@@ -1,9 +1,10 @@
-using Common.DTO;
+﻿using Common.DTO;
 using Common.Model;
 using Dapper;
 using DL.Base;
 using DL.Interface;
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace DL.Repository
@@ -42,6 +43,80 @@ namespace DL.Repository
             sc.organization_name AS OrganizationName";
 
         private const string _baseJoinSql = "FROM view_salary_composition_after_join sc";
+        //Override câu lệnh filter với cây đệ quy cho tổ chức
+        protected override string BuildFilterCondition(
+             List<FilterCondition> filters,
+             DynamicParameters parameters)
+        {
+            if (filters == null || !filters.Any())
+                return "";
+
+            var conditions = new List<string>();
+            var remainingFilters = new List<FilterCondition>();
+            var rootOrganizationIds = new List<Guid>();
+
+            foreach (var filter in filters)
+            {
+                var isOrganizationFilter =
+                    string.Equals(filter.Property, "organizationId", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(filter.Property, "organization_id", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(filter.Property, "sc.organization_id", StringComparison.OrdinalIgnoreCase);
+
+                if (!isOrganizationFilter)
+                {
+                    remainingFilters.Add(filter);
+                    continue;
+                }
+
+                if (filter.Value is JsonElement jsonElement)
+                {
+                    if (Guid.TryParse(jsonElement.ToString(), out var organizationId))
+                    {
+                        rootOrganizationIds.Add(organizationId);
+                    }
+                }
+                else if (filter.Value != null && Guid.TryParse(filter.Value.ToString(), out var organizationId))
+                {
+                    rootOrganizationIds.Add(organizationId);
+                }
+
+            }
+
+            rootOrganizationIds = rootOrganizationIds
+                .Distinct()
+                .ToList();
+
+            if (rootOrganizationIds.Any())
+            {
+                parameters.Add("FilterOrganizationIds", rootOrganizationIds);
+
+                conditions.Add(@"
+            sc.organization_id IN (
+                WITH RECURSIVE org_tree AS (
+                    SELECT organization_id
+                    FROM pa_organization
+                    WHERE organization_id IN @FilterOrganizationIds
+
+                    UNION ALL
+
+                    SELECT child.organization_id
+                    FROM pa_organization child
+                    INNER JOIN org_tree parent
+                        ON child.parent_id = parent.organization_id
+                )
+                SELECT organization_id FROM org_tree
+            )");
+            }
+
+            var baseCondition = base.BuildFilterCondition(remainingFilters, parameters);
+
+            if (!string.IsNullOrWhiteSpace(baseCondition))
+            {
+                conditions.Add(baseCondition);
+            }
+
+            return string.Join(" AND ", conditions);
+        }
 
         public async Task<PagingResponse<SalaryCompositionDto>> GetPagingDtoAsync(PagingRequest request)
         {

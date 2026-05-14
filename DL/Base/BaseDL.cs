@@ -77,7 +77,7 @@ namespace DL.Base
         /// <summary>
         /// Build câu lệnh filter động kết hợp nhiều điều kiện
         /// </summary>
-        protected string BuildFilterCondition(
+        protected virtual string BuildFilterCondition(
             List<FilterCondition> filters,
             DynamicParameters parameters)
         {

@@ -125,7 +125,7 @@ namespace DL.Repository
                 selectClause: _selectWithMapColumns,
                 fromAndJoinClause: _baseJoinSql,
                 tableAlias: "sc",
-                orderByClause: "sc.created_date DESC"
+                orderByClause: "sc.modified_date DESC"
             );
         }
 

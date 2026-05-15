@@ -87,7 +87,11 @@ namespace web_06.Controllers
             else
             {
                 var json = System.Text.Json.JsonSerializer.Serialize(dto);
-                entity = System.Text.Json.JsonSerializer.Deserialize<T>(json);
+                entity = System.Text.Json.JsonSerializer.Deserialize<T>(json,
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    })!;
             }
 
             if (entity == null) return BadRequest();

@@ -14,7 +14,7 @@ namespace Common.Model
 
         [Column("organization_id")]
         [JsonPropertyName("organizationId")]
-        public Guid OrganizationId { get; set; }
+        public Guid? OrganizationId { get; set; }
 
         [Column("system_composition_id")]
         [JsonPropertyName("systemCompositionId")]

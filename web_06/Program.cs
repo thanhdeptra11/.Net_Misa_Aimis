@@ -1,9 +1,11 @@
-
+﻿
 using BL.Service;
+using Common.DTO;
 using Common.Model;
 using DL;
 using DL.Interface;
 using DL.Repository;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace web_06
@@ -16,7 +18,34 @@ namespace web_06
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                //Override hành vi mặc định của API khi model validation thất bại
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    options.InvalidModelStateResponseFactory = context =>
+                    {
+                        var errors = context.ModelState
+                            //Giữ lại field bị lỗi
+                            .Where(x => x.Value != null && x.Value.Errors.Count > 0)
+                            .ToDictionary(
+                                //Lấy field
+                                x => x.Key,
+                                //Lấy lỗi của field
+                                x => x.Value!.Errors.Select(e => e.ErrorMessage).ToArray()
+                            );
+                        //Đồng bộ response trả về cho client
+                        var response = new ApiErrorResponse
+                        {
+                            DevMsg = "Model validation failed.",
+                            UserMsg = "Dữ liệu gửi lên không hợp lệ.",
+                            StatusCode = StatusCodes.Status400BadRequest,
+                            MoreInfor = errors,
+                            TraceId = context.HttpContext.TraceIdentifier
+                        };
+
+                        return new BadRequestObjectResult(response);
+                    };
+                }); ;
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

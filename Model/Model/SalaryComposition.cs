@@ -1,4 +1,4 @@
-using Common.Attributes;
+﻿using Common.Attributes;
 using Common.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -23,6 +23,7 @@ namespace Common.Model
         [Column("composition_code")]
         [JsonPropertyName("compositionCode")]
         [Unique]
+        [Display(Name = "Mã thành phần")]
         [Required]
         public string CompositionCode { get; set; }
 

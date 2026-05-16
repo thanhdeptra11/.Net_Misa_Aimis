@@ -41,7 +41,7 @@ namespace web_06.Controllers
         {
             var result = await _baseBL.GetByIdAsync(id);
             if (result == null)
-                return NotFound();
+                throw new KeyNotFoundException(Common.Resources.Messages.NotFoundRecord);
             return Ok(result);
         }
 
@@ -65,9 +65,9 @@ namespace web_06.Controllers
                         PropertyNameCaseInsensitive = true
                     })!;
             }
-            
-            if (entity == null) return BadRequest();
-            
+
+            if (entity == null) throw new ArgumentException("Có lỗi xảy ra.");
+
             var result = await _baseBL.AddAsync(entity);
             return Ok(new { message = Common.Resources.Messages.AddedSuccessfully, affectedRows = result });
         }
@@ -94,7 +94,7 @@ namespace web_06.Controllers
                     })!;
             }
 
-            if (entity == null) return BadRequest();
+            if (entity == null) throw new ArgumentException("Có lỗi xảy ra.");
 
             var result = await _baseBL.UpdateAsync(entity);
             return Ok(new { message = Common.Resources.Messages.UpdatedSuccessfully, affectedRows = result });
@@ -105,7 +105,7 @@ namespace web_06.Controllers
         {
             var result = await _baseBL.DeleteAsync(id);
             if (result == 0)
-                return NotFound();
+                throw new KeyNotFoundException("Không tìm thấy dữ liệu bản ghi");
             return Ok(new { message = Common.Resources.Messages.DeletedSuccessfully, affectedRows = result });
         }
 
@@ -119,27 +119,19 @@ namespace web_06.Controllers
         [HttpPost("save-batch")]
         public virtual async Task<IActionResult> SaveBatch([FromBody] List<T> entities)
         {
-            try
             {
                 if (entities == null || entities.Count == 0)
-                    return BadRequest(new { message = "Entities list cannot be null or empty." });
+                    throw new ArgumentException("Tham số không null hoặc rỗng.");
 
                 var result = await _baseBL.SaveDataAsync(entities);
                 return Ok(new 
                 { 
-                    message = "Batch save completed successfully", 
+                    message = "Lưu dữ liệu theo lô thành công", 
                     totalAffected = result,
                     totalProcessed = entities.Count
                 });
             }
-            catch (System.ComponentModel.DataAnnotations.ValidationException ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { message = "An error occurred while saving batch data", error = ex.Message });
-            }
+     
         }
     }
 

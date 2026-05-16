@@ -1,4 +1,5 @@
 using Common.Attributes;
+using Common.Exceptions;
 using Common.Model;
 using Common.Resources;
 using Dapper;
@@ -32,7 +33,7 @@ namespace BL.Base
         public async Task<int> SaveDataAsync(List<T> baseModels)
         {
             if (baseModels == null || baseModels.Count == 0)
-                throw new ArgumentException("Entities list cannot be null or empty.");
+                throw new ArgumentException("Entities list không được null hoặc rỗng.");
 
             var rowInserts = baseModels.Where(b => b.State == Status.Insert).ToList();
             var rowUpdates = baseModels.Where(b => b.State == Status.Update).ToList();
@@ -80,7 +81,7 @@ namespace BL.Base
                 // Validate từng entity trước khi save
                 var isValid = await ValidateBusinessRulesAsync(model, isUpdate);
                 if (!isValid)
-                    throw new ValidationException($"Entity {model.GetType().Name} does not satisfy business rules.");
+                    throw new ValidationException($"Entity {model.GetType().Name} không thỏa mãn quy tắc nghiệp vụ.");
             }
 
             await Task.CompletedTask;
@@ -112,7 +113,7 @@ namespace BL.Base
             if (modifiedByProp != null && modifiedByProp.CanWrite) modifiedByProp.SetValue(entity, "System");
 
             var isValid = await ValidateBusinessRulesAsync(entity, isUpdate: false);
-            if (!isValid) throw new Exception("Entity does not satisfy business rules.");
+            if (!isValid) throw new Exception(Messages.InvalidBusinessRule);
             return await _baseDL.AddAsync(entity);
         }
 
@@ -126,7 +127,7 @@ namespace BL.Base
             if (modifiedByProp != null && modifiedByProp.CanWrite) modifiedByProp.SetValue(entity, "System");
 
             var isValid = await ValidateBusinessRulesAsync(entity, isUpdate: true);
-            if (!isValid) throw new Exception("Entity does not satisfy business rules.");
+            if (!isValid) throw new BusinessException(Messages.InvalidBusinessRule);
             return await _baseDL.UpdateAsync(entity);
         }
 
@@ -139,7 +140,16 @@ namespace BL.Base
         {
             return await _baseDL.DeleteMultipleAsync(ids);
         }
-        
+        // Hàm lấy display name để hiển thị trong thông báo lỗi
+        private static string GetFriendlyPropertyName(System.Reflection.PropertyInfo property)
+        {
+            var displayAttribute = property
+                .GetCustomAttributes(typeof(DisplayAttribute), false)
+                .FirstOrDefault() as DisplayAttribute;
+
+            return displayAttribute?.Name ?? property.Name;
+        }
+
         public async Task<bool> ValidateBusinessRulesAsync(T entity, bool isUpdate = false)
         {
             var listProrerty = typeof(T).GetProperties();
@@ -179,7 +189,8 @@ namespace BL.Base
                         var isDup = await _baseDL.CheckDuplicate(property.Name, value, excludeId);
                         if (isDup)
                         {
-                            var message = uniqueAttribute.Message ?? string.Format(Common.Resources.Messages.AlreadyExists, property.Name);
+                            var displayName = GetFriendlyPropertyName(property);
+                            var message = uniqueAttribute.Message ?? string.Format(Common.Resources.Messages.AlreadyExists, displayName);
                             throw new ValidationException(message);
                         }
                     }
